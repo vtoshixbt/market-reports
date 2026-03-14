@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Pre-Market Intelligence Report | March 14, 2026</title>
+    <title>Daily Pre-Market Intelligence Report</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --bg: #080c10;
             --panel: #0d1318;
@@ -31,18 +25,42 @@
             --body-font: 'IBM Plex Sans', sans-serif;
         }
 
-        html, body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             background-color: var(--bg);
             color: var(--text);
             font-family: var(--body-font);
             line-height: 1.6;
-            overflow-x: hidden;
+            padding: 20px;
         }
 
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ANIMATIONS */
         @keyframes fadeDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -53,7 +71,7 @@
         @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -61,24 +79,18 @@
             }
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            animation: fadeDown 0.6s ease-out;
-        }
-
         /* HEADER */
         .header {
+            animation: fadeDown 0.6s ease-out;
+            margin-bottom: 30px;
             border-bottom: 2px solid var(--border-glow);
             padding-bottom: 20px;
-            margin-bottom: 30px;
         }
 
         .header h1 {
             font-family: var(--header-font);
-            font-size: 1.8rem;
-            font-weight: 500;
+            font-size: 24px;
+            font-weight: 600;
             color: var(--accent-cyan);
             margin-bottom: 8px;
             letter-spacing: 2px;
@@ -88,21 +100,31 @@
             display: flex;
             gap: 30px;
             font-family: var(--header-font);
-            font-size: 0.85rem;
+            font-size: 12px;
             color: var(--muted);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 18px;
+            }
+            .header-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
         }
 
         /* TICKER BAR */
         .ticker-bar {
+            animation: fadeDown 0.8s ease-out;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 12px;
             margin-bottom: 30px;
-            animation: fadeDown 0.8s ease-out 0.1s both;
         }
 
         .ticker-item {
-            background: var(--panel);
+            background-color: var(--panel);
             border-left: 4px solid var(--accent-cyan);
             border: 1px solid var(--border);
             border-left: 4px solid var(--accent-cyan);
@@ -110,9 +132,9 @@
             border-radius: 4px;
         }
 
-        .ticker-symbol {
+        .ticker-label {
             font-family: var(--header-font);
-            font-size: 0.75rem;
+            font-size: 11px;
             color: var(--muted);
             text-transform: uppercase;
             margin-bottom: 4px;
@@ -120,7 +142,7 @@
 
         .ticker-value {
             font-family: var(--header-font);
-            font-size: 1.2rem;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text);
             margin-bottom: 4px;
@@ -128,7 +150,7 @@
 
         .ticker-change {
             font-family: var(--header-font);
-            font-size: 0.8rem;
+            font-size: 12px;
             font-weight: 500;
         }
 
@@ -140,19 +162,33 @@
             color: var(--accent-red);
         }
 
+        @media (max-width: 768px) {
+            .ticker-bar {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                gap: 8px;
+            }
+            .ticker-item {
+                padding: 10px;
+            }
+            .ticker-value {
+                font-size: 14px;
+            }
+        }
+
         /* ALERT BANNER */
         .alert-banner {
+            animation: fadeDown 0.9s ease-out;
             background: linear-gradient(135deg, rgba(255, 61, 87, 0.15), rgba(255, 107, 53, 0.15));
             border: 1px solid var(--accent-red);
-            border-radius: 4px;
+            border-left: 4px solid var(--accent-red);
             padding: 16px;
             margin-bottom: 30px;
-            animation: fadeDown 0.8s ease-out 0.2s both;
+            border-radius: 4px;
         }
 
         .alert-banner-title {
             font-family: var(--header-font);
-            font-size: 0.85rem;
+            font-size: 12px;
             color: var(--accent-red);
             text-transform: uppercase;
             margin-bottom: 8px;
@@ -160,77 +196,98 @@
         }
 
         .alert-banner-text {
-            font-size: 0.95rem;
+            font-size: 14px;
             color: var(--text);
             line-height: 1.5;
         }
 
-        /* EXECUTIVE SUMMARY */
-        .executive-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-            animation: fadeUp 0.8s ease-out 0.3s both;
+        /* SECTION TAG */
+        .section-tag {
+            font-family: var(--header-font);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+            display: inline-block;
         }
 
-        .summary-box {
-            background: var(--panel);
+        .section-tag.cyan {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        .section-tag.orange {
+            color: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .section-tag.green {
+            color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .section-tag.purple {
+            color: var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+
+        .section-tag.yellow {
+            color: var(--accent-yellow);
+            border-color: var(--accent-yellow);
+        }
+
+        /* EXECUTIVE SUMMARY */
+        .executive-summary {
+            animation: fadeUp 0.8s ease-out;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .exec-row {
+            background-color: var(--panel);
             border: 1px solid var(--border);
             border-top: 3px solid var(--accent-cyan);
-            padding: 20px;
+            padding: 16px;
             border-radius: 4px;
         }
 
-        .summary-box.orange {
+        .exec-row.orange {
             border-top-color: var(--accent-orange);
         }
 
-        .summary-box.purple {
-            border-top-color: var(--accent-purple);
+        .exec-row.green {
+            border-top-color: var(--accent-green);
         }
 
-        .summary-label {
+        .exec-label {
             font-family: var(--header-font);
-            font-size: 0.75rem;
+            font-size: 11px;
             color: var(--muted);
             text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        .summary-content {
-            font-size: 0.95rem;
+        .exec-content {
+            font-size: 14px;
             line-height: 1.6;
             color: var(--text);
         }
 
-        /* SECTION HEADERS */
-        .section-header {
-            font-family: var(--header-font);
-            font-size: 0.85rem;
-            color: var(--accent-cyan);
-            text-transform: uppercase;
-            margin: 40px 0 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-glow);
-            letter-spacing: 2px;
-            font-weight: 600;
+        @media (max-width: 768px) {
+            .executive-summary {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .section-header.orange {
-            color: var(--accent-orange);
-            border-bottom-color: var(--accent-orange);
-        }
-
-        .section-header.green {
-            color: var(--accent-green);
-            border-bottom-color: var(--accent-green);
-        }
-
-        .section-header.purple {
-            color: var(--accent-purple);
-            border-bottom-color: var(--accent-purple);
+        /* SECTION CONTAINER */
+        .section {
+            animation: fadeUp 1s ease-out;
+            margin-bottom: 40px;
         }
 
         /* STAT BOXES */
@@ -238,11 +295,11 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .stat-box {
-            background: var(--panel);
+            background-color: var(--panel);
             border: 1px solid var(--border);
             border-top: 3px solid var(--accent-cyan);
             padding: 16px;
@@ -263,51 +320,53 @@
 
         .stat-label {
             font-family: var(--header-font);
-            font-size: 0.7rem;
+            font-size: 11px;
             color: var(--muted);
             text-transform: uppercase;
             margin-bottom: 8px;
-            letter-spacing: 1px;
         }
 
         .stat-value {
             font-family: var(--header-font);
-            font-size: 1.6rem;
+            font-size: 20px;
             font-weight: 600;
             color: var(--text);
             margin-bottom: 4px;
         }
 
-        .stat-change {
-            font-family: var(--header-font);
-            font-size: 0.8rem;
-            font-weight: 500;
+        .stat-note {
+            font-size: 12px;
+            color: var(--muted);
         }
 
-        .stat-change.positive {
-            color: var(--accent-green);
+        @media (max-width: 768px) {
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .stat-change.negative {
-            color: var(--accent-red);
+        @media (max-width: 480px) {
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* NARRATIVE BULLETS */
+        /* NARRATIVE */
         .narrative {
-            background: var(--panel);
+            background-color: var(--panel);
             border: 1px solid var(--border);
-            border-left: 4px solid var(--accent-cyan);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 16px;
+            margin-bottom: 24px;
             border-radius: 4px;
         }
 
-        .narrative.orange {
-            border-left-color: var(--accent-orange);
-        }
-
-        .narrative.green {
-            border-left-color: var(--accent-green);
+        .narrative-title {
+            font-family: var(--header-font);
+            font-size: 12px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .narrative ul {
@@ -315,27 +374,20 @@
         }
 
         .narrative li {
-            margin-bottom: 12px;
-            padding-left: 20px;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 16px;
             position: relative;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            color: var(--text);
         }
 
         .narrative li:before {
-            content: "▸";
+            content: "→";
             position: absolute;
             left: 0;
             color: var(--accent-cyan);
-            font-weight: bold;
-        }
-
-        .narrative.orange li:before {
-            color: var(--accent-orange);
-        }
-
-        .narrative.green li:before {
-            color: var(--accent-green);
+            font-weight: 600;
         }
 
         /* SCENARIO BOXES */
@@ -343,36 +395,35 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 16px;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .scenario-box {
-            background: var(--panel);
+            background-color: var(--panel);
             border: 1px solid var(--border);
-            border-top: 3px solid var(--accent-cyan);
-            padding: 20px;
+            padding: 16px;
             border-radius: 4px;
+            border-left: 4px solid var(--accent-cyan);
         }
 
         .scenario-box.bull {
-            border-top-color: var(--accent-green);
+            border-left-color: var(--accent-green);
         }
 
         .scenario-box.base {
-            border-top-color: var(--accent-yellow);
+            border-left-color: var(--accent-yellow);
         }
 
         .scenario-box.bear {
-            border-top-color: var(--accent-red);
+            border-left-color: var(--accent-red);
         }
 
         .scenario-title {
             font-family: var(--header-font);
-            font-size: 0.85rem;
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
         .scenario-box.bull .scenario-title {
@@ -389,24 +440,23 @@
 
         .scenario-prob {
             font-family: var(--header-font);
-            font-size: 0.8rem;
+            font-size: 11px;
             color: var(--muted);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .scenario-content {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text);
+            margin-bottom: 8px;
         }
 
         .scenario-target {
             font-family: var(--header-font);
-            font-size: 0.85rem;
-            color: var(--accent-cyan);
+            font-size: 12px;
             font-weight: 600;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
+            color: var(--accent-cyan);
         }
 
         .scenario-box.bull .scenario-target {
@@ -421,254 +471,158 @@
             color: var(--accent-red);
         }
 
-        /* TABLES */
-        .table-wrapper {
-            overflow-x: auto;
-            margin-bottom: 30px;
+        @media (max-width: 768px) {
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        table {
+        /* TABLE */
+        .data-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
+            margin-bottom: 24px;
+            background-color: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
-        table thead {
-            background: var(--panel);
+        .data-table thead {
+            background-color: rgba(0, 212, 255, 0.05);
             border-bottom: 2px solid var(--border-glow);
         }
 
-        table th {
+        .data-table th {
             font-family: var(--header-font);
-            padding: 12px;
-            text-align: left;
-            color: var(--accent-cyan);
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            padding: 12px;
+            text-align: left;
         }
 
-        table td {
+        .data-table td {
+            font-size: 13px;
             padding: 12px;
             border-bottom: 1px solid var(--border);
             color: var(--text);
         }
 
-        table tbody tr:hover {
-            background: rgba(0, 212, 255, 0.05);
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
         }
 
-        table td.positive {
+        .data-table tbody tr:hover {
+            background-color: rgba(0, 212, 255, 0.03);
+        }
+
+        .table-positive {
             color: var(--accent-green);
         }
 
-        table td.negative {
+        .table-negative {
             color: var(--accent-red);
         }
 
-        /* SPOTLIGHT PANEL */
-        .spotlight-panel {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 214, 0, 0.05));
-            border: 1px solid var(--accent-orange);
-            border-radius: 4px;
-            padding: 20px;
-            margin-bottom: 30px;
+        @media (max-width: 768px) {
+            .data-table {
+                font-size: 12px;
+            }
+            .data-table th,
+            .data-table td {
+                padding: 8px;
+            }
         }
 
-        .spotlight-title {
-            font-family: var(--header-font);
-            font-size: 0.85rem;
-            color: var(--accent-orange);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .spotlight-content {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .spotlight-key {
-            font-family: var(--header-font);
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-        }
-
-        /* VIX METRICS GRID */
+        /* VIX GRID */
         .vix-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .vix-cell {
-            background: var(--panel);
+            background-color: var(--panel);
             border: 1px solid var(--border);
-            border-top: 3px solid var(--accent-cyan);
-            padding: 16px;
+            padding: 12px;
             border-radius: 4px;
-        }
-
-        .vix-cell.elevated {
-            border-top-color: var(--accent-red);
-        }
-
-        .vix-cell.normal {
-            border-top-color: var(--accent-green);
+            text-align: center;
         }
 
         .vix-label {
             font-family: var(--header-font);
-            font-size: 0.7rem;
+            font-size: 10px;
             color: var(--muted);
             text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            margin-bottom: 6px;
         }
 
         .vix-value {
             font-family: var(--header-font);
-            font-size: 1.4rem;
+            font-size: 18px;
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 4px;
         }
 
-        .vix-note {
-            font-family: var(--header-font);
-            font-size: 0.75rem;
-            color: var(--muted);
+        @media (max-width: 480px) {
+            .vix-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* RISK REGISTER */
         .risk-panel {
-            background: var(--panel);
+            background-color: var(--panel);
             border: 1px solid var(--border);
             border-left: 4px solid var(--accent-red);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
             border-radius: 4px;
         }
 
-        .risk-name {
+        .risk-title {
             font-family: var(--header-font);
-            font-size: 0.85rem;
+            font-size: 12px;
+            font-weight: 600;
             color: var(--accent-red);
             text-transform: uppercase;
-            margin-bottom: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        .risk-item {
-            margin-bottom: 12px;
-        }
-
-        .risk-item-label {
-            font-family: var(--header-font);
-            font-size: 0.75rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            margin-bottom: 4px;
-            letter-spacing: 1px;
-        }
-
-        .risk-item-content {
-            font-size: 0.9rem;
-            line-height: 1.5;
+        .risk-content {
+            font-size: 13px;
+            line-height: 1.6;
             color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .risk-trigger {
+            font-family: var(--header-font);
+            font-size: 11px;
+            color: var(--accent-orange);
+            margin-top: 8px;
         }
 
         /* FOOTER */
         .footer {
+            animation: fadeUp 1.2s ease-out;
             border-top: 2px solid var(--border-glow);
             padding-top: 20px;
             margin-top: 40px;
             font-family: var(--header-font);
-            font-size: 0.8rem;
+            font-size: 11px;
             color: var(--muted);
             text-align: center;
         }
 
-        .footer-timestamp {
-            margin-bottom: 12px;
-        }
-
         .footer-disclaimer {
-            font-size: 0.75rem;
+            margin-top: 12px;
+            font-size: 10px;
             color: var(--muted);
             font-style: italic;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .container {
-                padding: 16px;
-            }
-
-            .header h1 {
-                font-size: 1.4rem;
-            }
-
-            .header-meta {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .ticker-bar {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-
-            .stat-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .scenario-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .executive-summary {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 12px;
-            }
-
-            .header h1 {
-                font-size: 1.1rem;
-                letter-spacing: 1px;
-            }
-
-            .ticker-bar {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .ticker-item {
-                padding: 10px;
-            }
-
-            .ticker-value {
-                font-size: 1rem;
-            }
-
-            table {
-                font-size: 0.8rem;
-            }
-
-            table th, table td {
-                padding: 8px;
-            }
         }
     </style>
 </head>
@@ -679,360 +633,332 @@
             <h1>// DAILY PRE-MARKET INTELLIGENCE REPORT</h1>
             <div class="header-meta">
                 <span>📅 March 14, 2026</span>
-                <span>⏱ Compiled 06:45 ET</span>
+                <span>⏰ Pre-Market Compilation</span>
             </div>
         </div>
 
         <!-- TICKER BAR -->
         <div class="ticker-bar">
             <div class="ticker-item">
-                <div class="ticker-symbol">SPX</div>
+                <div class="ticker-label">SPX</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">NDX</div>
+                <div class="ticker-label">NDX</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">DJI</div>
+                <div class="ticker-label">DJI</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">ES Futures</div>
+                <div class="ticker-label">ES Futures</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">BTC/USD</div>
+                <div class="ticker-label">BTC/USD</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">WTI Crude</div>
+                <div class="ticker-label">WTI Crude</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">VIX</div>
+                <div class="ticker-label">VIX</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">10Y Yield</div>
+                <div class="ticker-label">10Y Yield</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
             <div class="ticker-item">
-                <div class="ticker-symbol">DXY</div>
+                <div class="ticker-label">DXY</div>
                 <div class="ticker-value">—</div>
-                <div class="ticker-change">Data unavailable</div>
+                <div class="ticker-change">Data Pending</div>
             </div>
         </div>
 
         <!-- EXECUTIVE SUMMARY -->
+        <div class="section-tag cyan">Executive Summary</div>
         <div class="executive-summary">
-            <div class="summary-box">
-                <div class="summary-label">Primary Focus</div>
-                <div class="summary-content">No market data provided for March 14, 2026. Unable to assess current positioning or intraday drivers without real-time quotes, futures levels, or volatility metrics.</div>
+            <div class="exec-row">
+                <div class="exec-label">Primary Focus</div>
+                <div class="exec-content">Market data unavailable for March 14, 2026. Unable to establish directional bias or volatility regime without current pricing.</div>
             </div>
-            <div class="summary-box orange">
-                <div class="summary-label">Positioning</div>
-                <div class="summary-content">Awaiting market open data. Recommend monitoring opening print, volume profile, and any overnight gap activity once pre-market session begins.</div>
+            <div class="exec-row orange">
+                <div class="exec-label">Positioning</div>
+                <div class="exec-content">Awaiting market open data to assess institutional flows, options positioning, and derivative hedging levels.</div>
             </div>
-            <div class="summary-box purple">
-                <div class="summary-label">Strategic Outlook</div>
-                <div class="summary-content">Stand by for earnings calendar, economic data releases, and Fed communications. Volatility regime and sector rotation will depend on macro surprises and earnings beats/misses.</div>
-            </div>
-        </div>
-
-        <!-- SECTION 01: MACRO ENVIRONMENT -->
-        <div class="section-header">01 · MACRO ENVIRONMENT</div>
-
-        <div class="stat-grid">
-            <div class="stat-box">
-                <div class="stat-label">Data Status</div>
-                <div class="stat-value">—</div>
-                <div class="stat-change">No quotes provided</div>
-            </div>
-            <div class="stat-box orange">
-                <div class="stat-label">Market Structure</div>
-                <div class="stat-value">—</div>
-                <div class="stat-change">Awaiting open</div>
-            </div>
-            <div class="stat-box green">
-                <div class="stat-label">Volatility Regime</div>
-                <div class="stat-value">—</div>
-                <div class="stat-change">Unknown</div>
-            </div>
-            <div class="stat-box red">
-                <div class="stat-label">Risk Events</div>
-                <div class="stat-value">—</div>
-                <div class="stat-change">TBD</div>
+            <div class="exec-row green">
+                <div class="exec-label">Strategic Outlook</div>
+                <div class="exec-content">Report framework ready for real-time data integration. Monitor for macro catalysts, earnings surprises, and geopolitical developments at market open.</div>
             </div>
         </div>
 
-        <div class="narrative">
-            <ul>
-                <li><strong>Data Gap:</strong> No market quotes, index levels, or futures data provided for this report. Unable to assess overnight moves, gap risk, or pre-market sentiment.</li>
-                <li><strong>Earnings Season:</strong> Mid-March typically sees elevated earnings flow. Recommend cross-referencing earnings calendar for today's releases and guidance revisions.</li>
-                <li><strong>Fed Calendar:</strong> Monitor for any FOMC communications, speaker schedules, or economic data (jobless claims, CPI, retail sales) that could drive intraday volatility.</li>
-                <li><strong>Sector Rotation:</strong> Without current price data, unable to assess leadership. Watch for breadth divergences and sector-specific earnings surprises at open.</li>
-                <li><strong>Macro Backdrop:</strong> Q1 2026 positioning likely reflects inflation expectations, rate trajectory, and corporate earnings resilience. Await open for directional cues.</li>
-            </ul>
-        </div>
-
-        <div class="scenario-grid">
-            <div class="scenario-box bull">
-                <div class="scenario-title">Bull Case</div>
-                <div class="scenario-prob">Probability: 35%</div>
-                <div class="scenario-content">Earnings beat expectations; Fed signals patience on rates; tech leadership resumes; risk-on sentiment dominates.</div>
-                <div class="scenario-target">Target: +2.5% from current (data pending)</div>
+        <!-- 01 MACRO ENVIRONMENT -->
+        <div class="section">
+            <div class="section-tag cyan">01 · Macro Environment</div>
+            
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Data Status</div>
+                    <div class="stat-value">Pending</div>
+                    <div class="stat-note">Awaiting market open</div>
+                </div>
+                <div class="stat-box orange">
+                    <div class="stat-label">Economic Calendar</div>
+                    <div class="stat-value">—</div>
+                    <div class="stat-note">No data provided</div>
+                </div>
+                <div class="stat-box green">
+                    <div class="stat-label">Fed Guidance</div>
+                    <div class="stat-value">—</div>
+                    <div class="stat-note">No data provided</div>
+                </div>
+                <div class="stat-box red">
+                    <div class="stat-label">Geopolitical Risk</div>
+                    <div class="stat-value">—</div>
+                    <div class="stat-note">No data provided</div>
+                </div>
             </div>
-            <div class="scenario-box base">
-                <div class="scenario-title">Base Case</div>
-                <div class="scenario-prob">Probability: 45%</div>
-                <div class="scenario-content">Mixed earnings; macro data in line with expectations; consolidation within recent range; sector rotation continues.</div>
-                <div class="scenario-target">Target: ±1.0% from current (data pending)</div>
+
+            <div class="narrative">
+                <div class="narrative-title">Macro Context</div>
+                <ul>
+                    <li>No structured market data provided for March 14, 2026 pre-market session.</li>
+                    <li>Unable to assess equity index futures, bond yields, currency strength, or commodity pricing.</li>
+                    <li>Volatility regime, risk-on/risk-off sentiment, and macro momentum remain indeterminate.</li>
+                    <li>Recommend data refresh at market open (9:30 ET) for actionable intelligence.</li>
+                </ul>
             </div>
-            <div class="scenario-box bear">
-                <div class="scenario-title">Bear Case</div>
-                <div class="scenario-prob">Probability: 20%</div>
-                <div class="scenario-content">Earnings misses; inflation surprise; Fed hawkish pivot; risk-off unwind; flight to safety.</div>
-                <div class="scenario-target">Target: -3.0% from current (data pending)</div>
-            </div>
-        </div>
 
-        <!-- SECTION 02: EARNINGS & EVENTS CALENDAR -->
-        <div class="section-header orange">02 · EARNINGS & EVENTS CALENDAR</div>
-
-        <h3 style="font-family: var(--header-font); font-size: 0.85rem; color: var(--muted); text-transform: uppercase; margin: 20px 0 12px 0; letter-spacing: 1px;">Earnings Today (March 14, 2026)</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Ticker</th>
-                        <th>Time</th>
-                        <th>Sector</th>
-                        <th>Key Watch</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="5" style="text-align: center; color: var(--muted); padding: 20px;">No earnings data provided</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 style="font-family: var(--header-font); font-size: 0.85rem; color: var(--muted); text-transform: uppercase; margin: 20px 0 12px 0; letter-spacing: 1px;">Economic Calendar (March 14, 2026)</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Time (ET)</th>
-                        <th>Indicator</th>
-                        <th>Forecast</th>
-                        <th>Prior</th>
-                        <th>Impact</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="5" style="text-align: center; color: var(--muted); padding: 20px;">No economic calendar data provided</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="spotlight-panel">
-            <div class="spotlight-title">📊 Earnings Spotlight</div>
-            <div class="spotlight-content">
-                No specific earnings data available for March 14, 2026. Recommend checking earnings calendar at market open for today's releases, guidance revisions, and sector-specific catalysts. Focus on forward guidance and margin commentary for clues on Q2 2026 outlook.
-            </div>
-            <div class="spotlight-key">
-                <strong>Key Metrics to Monitor:</strong> EPS beats/misses, revenue growth, margin expansion, guidance raises/cuts, free cash flow, capital allocation plans.
+            <div class="scenario-grid">
+                <div class="scenario-box bull">
+                    <div class="scenario-title">Bull Case</div>
+                    <div class="scenario-prob">Probability: 35%</div>
+                    <div class="scenario-content">Risk-on sentiment persists; equities extend gains on positive earnings surprises and dovish Fed signals.</div>
+                    <div class="scenario-target">Target: +2–3% from current levels</div>
+                </div>
+                <div class="scenario-box base">
+                    <div class="scenario-title">Base Case</div>
+                    <div class="scenario-prob">Probability: 45%</div>
+                    <div class="scenario-content">Consolidation phase; mixed earnings, stable macro data, and balanced positioning keep markets range-bound.</div>
+                    <div class="scenario-target">Target: ±1% from current levels</div>
+                </div>
+                <div class="scenario-box bear">
+                    <div class="scenario-title">Bear Case</div>
+                    <div class="scenario-prob">Probability: 20%</div>
+                    <div class="scenario-content">Hawkish inflation surprise or geopolitical shock triggers risk-off; equities correct 3–5% intraday.</div>
+                    <div class="scenario-target">Target: –3–5% from current levels</div>
+                </div>
             </div>
         </div>
 
-        <!-- SECTION 03: EQUITY OPTIONS CONSIDERATIONS -->
-        <div class="section-header green">03 · EQUITY OPTIONS CONSIDERATIONS</div>
+        <!-- 02 EARNINGS & EVENTS CALENDAR -->
+        <div class="section">
+            <div class="section-tag orange">02 · Earnings & Events Calendar</div>
+            
+            <div style="margin-bottom: 24px;">
+                <h3 style="font-family: var(--header-font); font-size: 12px; color: var(--accent-orange); text-transform: uppercase; margin-bottom: 12px;">Earnings Today</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Company</th>
+                            <th>Time</th>
+                            <th>EPS Est.</th>
+                            <th>Revenue Est.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: var(--muted);">No earnings data provided</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="vix-grid">
-            <div class="vix-cell">
-                <div class="vix-label">VIX Level</div>
-                <div class="vix-value">—</div>
-                <div class="vix-note">Data unavailable</div>
+            <div style="margin-bottom: 24px;">
+                <h3 style="font-family: var(--header-font); font-size: 12px; color: var(--accent-orange); text-transform: uppercase; margin-bottom: 12px;">Economic Calendar</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time (ET)</th>
+                            <th>Event</th>
+                            <th>Forecast</th>
+                            <th>Prior</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: var(--muted);">No economic calendar data provided</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="vix-cell">
-                <div class="vix-label">VIX 1M Implied</div>
-                <div class="vix-value">—</div>
-                <div class="vix-note">Data unavailable</div>
-            </div>
-            <div class="vix-cell">
-                <div class="vix-label">Put/Call Ratio</div>
-                <div class="vix-value">—</div>
-                <div class="vix-note">Data unavailable</div>
-            </div>
-            <div class="vix-cell">
-                <div class="vix-label">Skew (25Δ)</div>
-                <div class="vix-value">—</div>
-                <div class="vix-note">Data unavailable</div>
-            </div>
-            <div class="vix-cell">
-                <div class="vix-label">Term Structure</div>
-                <div class="vix-value">—</div>
-                <div class="vix-note">Data unavailable</div>
-            </div>
-            <div class="vix-cell">
-                <div class="vix-label">IV Percentile</div>
-                <div class="vix-value">—</div>
-                <div class="vix-note">Data unavailable</div>
+
+            <div class="narrative">
+                <div class="narrative-title">Earnings Spotlight</div>
+                <ul>
+                    <li>No earnings data or economic calendar events provided for March 14, 2026.</li>
+                    <li>Recommend cross-referencing earnings.com, CNBC, and Bloomberg for real-time updates.</li>
+                    <li>Monitor pre-market movers for guidance revisions and sector rotation signals.</li>
+                </ul>
             </div>
         </div>
 
-        <div class="narrative green">
-            <ul>
-                <li><strong>Vol Regime Unknown:</strong> Without VIX data, unable to assess current volatility regime. Monitor opening VIX print for clues on market anxiety and hedging demand.</li>
-                <li><strong>Earnings Vol:</strong> Mid-March earnings flow typically elevates single-stock IV. Watch for elevated skew in mega-cap tech and financials ahead of releases.</li>
-                <li><strong>Gamma Risk:</strong> Large index moves at open could trigger gamma hedging. Monitor ES futures and SPX levels for key technical breaks.</li>
-                <li><strong>Volatility Sellers:</strong> If VIX opens low, short-vol strategies may face adverse moves if macro surprises hit. Recommend tight stops on short-vol positions.</li>
-                <li><strong>Options Flow:</strong> Track dealer gamma and net positioning. Heavy call buying could support upside; put buying signals defensive positioning.</li>
-            </ul>
+        <!-- 03 EQUITY OPTIONS CONSIDERATIONS -->
+        <div class="section">
+            <div class="section-tag purple">03 · Equity Options Considerations</div>
+            
+            <div class="vix-grid">
+                <div class="vix-cell">
+                    <div class="vix-label">VIX Level</div>
+                    <div class="vix-value">—</div>
+                </div>
+                <div class="vix-cell">
+                    <div class="vix-label">VIX 1M IV</div>
+                    <div class="vix-value">—</div>
+                </div>
+                <div class="vix-cell">
+                    <div class="vix-label">Put/Call Ratio</div>
+                    <div class="vix-value">—</div>
+                </div>
+                <div class="vix-cell">
+                    <div class="vix-label">Skew (25Δ)</div>
+                    <div class="vix-value">—</div>
+                </div>
+                <div class="vix-cell">
+                    <div class="vix-label">Term Structure</div>
+                    <div class="vix-value">—</div>
+                </div>
+                <div class="vix-cell">
+                    <div class="vix-label">Vol Regime</div>
+                    <div class="vix-value">—</div>
+                </div>
+            </div>
+
+            <div class="narrative">
+                <div class="narrative-title">Vol Observations</div>
+                <ul>
+                    <li>No VIX, skew, term structure, or options flow data provided.</li>
+                    <li>Unable to assess hedging demand, tail risk premium, or directional bias from derivatives market.</li>
+                    <li>Recommend monitoring CBOE options volume and IV percentile at market open.</li>
+                    <li>Watch for unusual call/put ratios as early signal of institutional positioning shifts.</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- SECTION 04: BITCOIN -->
-        <div class="section-header purple">04 · BITCOIN</div>
-
-        <h3 style="font-family: var(--header-font); font-size: 0.85rem; color: var(--muted); text-transform: uppercase; margin: 20px 0 12px 0; letter-spacing: 1px;">Key Levels & Structure</h3>
-        <div class="table-wrapper">
-            <table>
+        <!-- 04 BITCOIN -->
+        <div class="section">
+            <div class="section-tag yellow">04 · Bitcoin</div>
+            
+            <table class="data-table">
                 <thead>
                     <tr>
                         <th>Level</th>
                         <th>Price</th>
                         <th>Status</th>
-                        <th>Notes</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>All-Time High</td>
+                        <td>ATH (All-Time High)</td>
                         <td>—</td>
-                        <td>Data unavailable</td>
-                        <td>No BTC/USD quote provided</td>
+                        <td style="color: var(--muted);">Data Pending</td>
                     </tr>
                     <tr>
                         <td>Resistance 1</td>
                         <td>—</td>
-                        <td>Data unavailable</td>
-                        <td>Unable to assess technical levels</td>
+                        <td style="color: var(--muted);">Data Pending</td>
                     </tr>
                     <tr>
                         <td>Current Price</td>
                         <td>—</td>
-                        <td>Data unavailable</td>
-                        <td>Awaiting market data</td>
+                        <td style="color: var(--muted);">Data Pending</td>
                     </tr>
                     <tr>
                         <td>Support 1</td>
                         <td>—</td>
-                        <td>Data unavailable</td>
-                        <td>Unable to assess technical levels</td>
+                        <td style="color: var(--muted);">Data Pending</td>
                     </tr>
                     <tr>
                         <td>Bear Level</td>
                         <td>—</td>
-                        <td>Data unavailable</td>
-                        <td>No downside target available</td>
+                        <td style="color: var(--muted);">Data Pending</td>
                     </tr>
                 </tbody>
             </table>
-        </div>
 
-        <div class="narrative orange">
-            <ul>
-                <li><strong>Crypto Market Status:</strong> No BTC/USD data provided. Monitor spot price, futures basis, and funding rates at open for directional bias.</li>
-                <li><strong>Derivatives Activity:</strong> Check open interest and liquidation levels on major exchanges. Elevated long liquidations could signal weakness; short liquidations suggest strength.</li>
-                <li><strong>Macro Sensitivity:</strong> Bitcoin typically trades inversely to real rates. Monitor 10Y yield and Fed expectations for macro drivers.</li>
-                <li><strong>Regulatory Risk:</strong> Stay alert for any crypto-related regulatory announcements or enforcement actions that could impact sentiment.</li>
-                <li><strong>Altcoin Correlation:</strong> Watch for divergence between BTC and altcoins. Strength in alts while BTC consolidates could signal risk-on rotation.</li>
-            </ul>
-        </div>
+            <div class="narrative">
+                <div class="narrative-title">Crypto Derivatives & Macro</div>
+                <ul>
+                    <li>No Bitcoin pricing, funding rates, or open interest data provided.</li>
+                    <li>Unable to assess leverage, liquidation cascades, or whale positioning.</li>
+                    <li>Monitor Glassnode and Bybit for on-chain metrics and derivatives sentiment.</li>
+                    <li>Bitcoin typically tracks risk-on sentiment; watch for correlation with equity index futures.</li>
+                </ul>
+            </div>
 
-        <div class="scenario-grid">
-            <div class="scenario-box bull">
-                <div class="scenario-title">Bull Case</div>
-                <div class="scenario-prob">Probability: 40%</div>
-                <div class="scenario-content">Fed cuts rates; inflation moderates; institutional demand resumes; macro tailwinds support risk assets.</div>
-                <div class="scenario-target">Target: +15% from current (data pending)</div>
-            </div>
-            <div class="scenario-box base">
-                <div class="scenario-title">Base Case</div>
-                <div class="scenario-prob">Probability: 40%</div>
-                <div class="scenario-content">Sideways consolidation; macro uncertainty; retail participation steady; technical range-bound trading.</div>
-                <div class="scenario-target">Target: ±5% from current (data pending)</div>
-            </div>
-            <div class="scenario-box bear">
-                <div class="scenario-title">Bear Case</div>
-                <div class="scenario-prob">Probability: 20%</div>
-                <div class="scenario-content">Risk-off unwind; Fed hawkish surprise; regulatory crackdown; macro shock triggers liquidations.</div>
-                <div class="scenario-target">Target: -20% from current (data pending)</div>
-            </div>
-        </div>
-
-        <!-- SECTION 05: RISK REGISTER -->
-        <div class="section-header">05 · RISK REGISTER</div>
-
-        <div class="risk-panel">
-            <div class="risk-name">⚠ Macro Data Surprise</div>
-            <div class="risk-item">
-                <div class="risk-item-label">Mechanism</div>
-                <div class="risk-item-content">Unexpected inflation, employment, or retail sales data could trigger sharp repricing of Fed rate expectations and equity valuations.</div>
-            </div>
-            <div class="risk-item">
-                <div class="risk-item-label">Trigger to Watch</div>
-                <div class="risk-item-content">CPI, jobless claims, or retail sales miss/beat consensus by >0.5%. Monitor 10Y yield and ES futures for immediate reaction.</div>
+            <div class="scenario-grid">
+                <div class="scenario-box bull">
+                    <div class="scenario-title">Bull Case</div>
+                    <div class="scenario-prob">Probability: 40%</div>
+                    <div class="scenario-content">Risk-on sentiment, positive macro data, and institutional inflows drive BTC higher.</div>
+                    <div class="scenario-target">Target: +5–10% from current</div>
+                </div>
+                <div class="scenario-box base">
+                    <div class="scenario-title">Base Case</div>
+                    <div class="scenario-prob">Probability: 40%</div>
+                    <div class="scenario-content">Consolidation; BTC trades sideways within established support/resistance range.</div>
+                    <div class="scenario-target">Target: ±2% from current</div>
+                </div>
+                <div class="scenario-box bear">
+                    <div class="scenario-title">Bear Case</div>
+                    <div class="scenario-prob">Probability: 20%</div>
+                    <div class="scenario-content">Risk-off event, regulatory headwinds, or macro shock triggers liquidations.</div>
+                    <div class="scenario-target">Target: –8–12% from current</div>
+                </div>
             </div>
         </div>
 
-        <div class="risk-panel">
-            <div class="risk-name">⚠ Earnings Disappointment</div>
-            <div class="risk-item">
-                <div class="risk-item-label">Mechanism</div>
-                <div class="risk-item-content">Weak earnings beats, margin compression, or negative guidance could unwind Q1 rally and trigger sector rotation or broad selloff.</div>
+        <!-- 05 RISK REGISTER -->
+        <div class="section">
+            <div class="section-tag orange">05 · Risk Register</div>
+            
+            <div class="risk-panel">
+                <div class="risk-title">Geopolitical Escalation</div>
+                <div class="risk-content">Unresolved regional tensions or unexpected military action could trigger broad risk-off, equity selloff, and flight-to-safety in bonds/USD.</div>
+                <div class="risk-trigger">🔔 Trigger: Breaking news of military action, sanctions escalation, or diplomatic breakdown.</div>
             </div>
-            <div class="risk-item">
-                <div class="risk-item-label">Trigger to Watch</div>
-                <div class="risk-item-content">Mega-cap tech or financial earnings misses; guidance cuts; margin compression signals. Monitor single-stock IV and sector breadth.</div>
-            </div>
-        </div>
 
-        <div class="risk-panel">
-            <div class="risk-name">⚠ Geopolitical Escalation</div>
-            <div class="risk-item">
-                <div class="risk-item-label">Mechanism</div>
-                <div class="risk-item-content">Unexpected geopolitical event (conflict, sanctions, trade tensions) could spike VIX, commodities, and trigger flight-to-safety bid in bonds and gold.</div>
+            <div class="risk-panel">
+                <div class="risk-title">Inflation Surprise</div>
+                <div class="risk-content">Hotter-than-expected CPI or PPI data could force Fed to maintain hawkish stance longer, pressuring equities and extending yield curve steepening.</div>
+                <div class="risk-trigger">🔔 Trigger: CPI print >0.5% MoM or >4.5% YoY; PPI surprise to upside.</div>
             </div>
-            <div class="risk-item">
-                <div class="risk-item-label">Trigger to Watch</div>
-                <div class="risk-item-content">Breaking news on major geopolitical developments. Monitor VIX spike, crude oil, and 10Y yield for market reaction. Watch safe-haven flows.</div>
+
+            <div class="risk-panel">
+                <div class="risk-title">Earnings Recession</div>
+                <div class="risk-content">Widespread guidance cuts or margin compression across sectors could undermine equity valuations and trigger multiple compression.</div>
+                <div class="risk-trigger">🔔 Trigger: >30% of S&P 500 companies issue negative guidance; EPS revisions turn negative.</div>
             </div>
         </div>
 
         <!-- FOOTER -->
         <div class="footer">
-            <div class="footer-timestamp">
-                Report compiled: March 14, 2026 · 06:45 ET | Data as of market close March 13, 2026
-            </div>
-            <div class="footer-disclaimer">
-                This report is for informational purposes only and does not constitute investment advice, a recommendation, or an offer to buy or sell any security. Market data was not provided for this report date; all sections reflect structural analysis pending real-time quotes. Consult a financial advisor before making trading decisions.
-            </div>
+            <div>Compiled: March 14, 2026 | Pre-Market Session</div>
+            <div class="footer-disclaimer">This report is for informational purposes only and does not constitute investment advice. Market data unavailable; recommendations pending real-time pricing.</div>
         </div>
     </div>
 </body>
 </html>
-```
