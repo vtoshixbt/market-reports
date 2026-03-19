@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pre-Market Intelligence Report — March 19, 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Pre-Market Intelligence Report // March 19, 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -25,7 +23,7 @@
     --body-font: 'IBM Plex Sans', sans-serif;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: var(--bg);
@@ -56,87 +54,98 @@
     100% { transform: translateX(-50%); }
   }
 
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
   /* HEADER */
-  .header {
+  .report-header {
     background: linear-gradient(180deg, #0a1520 0%, var(--bg) 100%);
     border-bottom: 1px solid var(--border-glow);
-    padding: 28px 0 20px;
+    padding: 28px 32px 22px;
     animation: fadeDown 0.6s ease both;
   }
 
-  .header-inner {
+  .header-top {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
-  .header-label {
+  .report-title {
     font-family: var(--header-font);
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-cyan);
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
-  .header-title {
+  .report-subtitle {
     font-family: var(--header-font);
-    font-size: clamp(16px, 2.5vw, 24px);
-    font-weight: 600;
-    color: var(--accent-cyan);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--text);
+    margin-top: 6px;
     letter-spacing: 0.04em;
   }
 
-  .header-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 4px;
-    flex-wrap: wrap;
+  .report-subtitle span {
+    color: var(--accent-cyan);
+    font-weight: 500;
   }
 
-  .header-meta span {
+  .header-meta {
+    text-align: right;
     font-family: var(--header-font);
     font-size: 11px;
     color: var(--muted);
+    line-height: 1.8;
   }
 
   .header-meta .date {
+    font-size: 13px;
     color: var(--text);
     font-weight: 500;
   }
 
   /* TICKER BAR */
   .ticker-wrap {
-    background: var(--panel);
+    background: #090e14;
     border-left: 3px solid var(--accent-cyan);
     border-bottom: 1px solid var(--border);
     overflow: hidden;
-    position: sticky;
+    padding: 0;
+    position: relative;
+  }
+
+  .ticker-label {
+    position: absolute;
+    left: 0;
     top: 0;
-    z-index: 100;
-    animation: fadeDown 0.7s ease both;
+    bottom: 0;
+    background: #0a1a24;
+    border-right: 1px solid var(--border-glow);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    font-family: var(--header-font);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    letter-spacing: 0.1em;
+    z-index: 2;
+    white-space: nowrap;
+  }
+
+  .ticker-scroll-container {
+    overflow: hidden;
+    margin-left: 80px;
+    padding: 10px 0;
   }
 
   .ticker-track {
     display: flex;
-    width: max-content;
     animation: scrollTicker 40s linear infinite;
-  }
-
-  .ticker-track:hover {
-    animation-play-state: paused;
-  }
-
-  .ticker-inner {
-    display: flex;
-    padding: 10px 0;
-    gap: 0;
+    width: max-content;
   }
 
   .ticker-item {
@@ -146,67 +155,53 @@
     padding: 0 24px;
     border-right: 1px solid var(--border);
     white-space: nowrap;
+    font-family: var(--header-font);
+    font-size: 12px;
   }
 
-  .ticker-symbol {
-    font-family: var(--header-font);
-    font-size: 11px;
-    font-weight: 600;
+  .ticker-sym {
     color: var(--muted);
+    font-weight: 500;
+    font-size: 10px;
     letter-spacing: 0.08em;
   }
 
   .ticker-price {
-    font-family: var(--header-font);
-    font-size: 12px;
-    font-weight: 500;
     color: var(--text);
+    font-weight: 600;
   }
 
-  .ticker-change {
-    font-family: var(--header-font);
-    font-size: 11px;
-    font-weight: 400;
-  }
-
-  .up { color: var(--accent-green); }
-  .down { color: var(--accent-red); }
-  .flat { color: var(--muted); }
+  .ticker-chg.up { color: var(--accent-green); }
+  .ticker-chg.down { color: var(--accent-red); }
 
   /* ALERT BANNER */
   .alert-banner {
-    background: linear-gradient(90deg, rgba(255,61,87,0.12) 0%, rgba(255,107,53,0.08) 100%);
-    border: 1px solid rgba(255,61,87,0.4);
-    border-left: 4px solid var(--accent-red);
-    margin: 16px 0;
-    padding: 14px 20px;
-    animation: fadeDown 0.8s ease both;
-    border-radius: 2px;
+    background: linear-gradient(90deg, rgba(255,61,87,0.15) 0%, rgba(255,107,53,0.08) 100%);
+    border-top: 2px solid var(--accent-red);
+    border-bottom: 1px solid rgba(255,61,87,0.3);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeDown 0.5s ease 0.2s both;
   }
 
-  .alert-label {
+  .alert-tag {
     font-family: var(--header-font);
     font-size: 10px;
     font-weight: 600;
     color: var(--accent-red);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .alert-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-red);
-    animation: pulse 1.2s ease infinite;
+    background: rgba(255,61,87,0.15);
+    border: 1px solid var(--accent-red);
+    padding: 3px 10px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    animation: pulse 2s ease infinite;
   }
 
   .alert-text {
-    font-size: 13px;
+    font-family: var(--header-font);
+    font-size: 12px;
     color: var(--text);
     line-height: 1.5;
   }
@@ -216,88 +211,89 @@
   }
 
   /* MAIN LAYOUT */
-  .main {
-    padding: 20px 0 40px;
-    animation: fadeUp 0.8s ease both;
+  .main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
   }
 
-  /* SECTION HEADERS */
+  /* SECTION TAGS */
   .section-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .section-tag .tag-num {
+    display: inline-block;
     font-family: var(--header-font);
     font-size: 10px;
     font-weight: 600;
-    color: var(--accent-cyan);
-    letter-spacing: 0.15em;
-    border: 1px solid var(--accent-cyan);
-    padding: 2px 8px;
-    border-radius: 2px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid;
+    margin-bottom: 16px;
   }
 
-  .section-tag .tag-title {
-    font-family: var(--header-font);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+  .tag-cyan { color: var(--accent-cyan); border-color: var(--accent-cyan); background: rgba(0,212,255,0.06); }
+  .tag-orange { color: var(--accent-orange); border-color: var(--accent-orange); background: rgba(255,107,53,0.06); }
+  .tag-green { color: var(--accent-green); border-color: var(--accent-green); background: rgba(0,230,118,0.06); }
+  .tag-yellow { color: var(--accent-yellow); border-color: var(--accent-yellow); background: rgba(255,214,0,0.06); }
+  .tag-purple { color: var(--accent-purple); border-color: var(--accent-purple); background: rgba(179,136,255,0.06); }
+  .tag-red { color: var(--accent-red); border-color: var(--accent-red); background: rgba(255,61,87,0.06); }
 
   /* PANELS */
   .panel {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 20px;
-    margin-bottom: 16px;
+    padding: 22px 24px;
+    animation: fadeUp 0.5s ease both;
   }
 
-  .panel-cyan { border-top: 2px solid var(--accent-cyan); }
-  .panel-orange { border-top: 2px solid var(--accent-orange); }
-  .panel-green { border-top: 2px solid var(--accent-green); }
-  .panel-red { border-top: 2px solid var(--accent-red); }
-  .panel-yellow { border-top: 2px solid var(--accent-yellow); }
-  .panel-purple { border-top: 2px solid var(--accent-purple); }
+  .panel-cyan { border-top: 3px solid var(--accent-cyan); }
+  .panel-orange { border-top: 3px solid var(--accent-orange); }
+  .panel-green { border-top: 3px solid var(--accent-green); }
+  .panel-yellow { border-top: 3px solid var(--accent-yellow); }
+  .panel-purple { border-top: 3px solid var(--accent-purple); }
+  .panel-red { border-top: 3px solid var(--accent-red); }
+
+  .panel-title {
+    font-family: var(--header-font);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    letter-spacing: 0.06em;
+  }
 
   /* EXECUTIVE SUMMARY */
-  .exec-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
   .exec-row {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 16px;
-    align-items: start;
-    padding: 14px 16px;
-    background: rgba(0,212,255,0.03);
+    display: flex;
+    gap: 0;
     border: 1px solid var(--border);
-    border-left: 3px solid var(--accent-cyan);
-    border-radius: 2px;
+    margin-bottom: 12px;
+    animation: fadeUp 0.5s ease both;
   }
 
   .exec-label {
     font-family: var(--header-font);
     font-size: 10px;
     font-weight: 600;
+    letter-spacing: 0.1em;
     color: var(--accent-cyan);
-    letter-spacing: 0.12em;
+    background: #0a1520;
+    border-right: 1px solid var(--border);
+    padding: 16px 18px;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
     text-transform: uppercase;
-    padding-top: 2px;
   }
 
   .exec-content {
-    font-size: 13px;
+    padding: 14px 20px;
+    font-size: 14px;
+    line-height: 1.65;
     color: var(--text);
-    line-height: 1.6;
+    flex: 1;
   }
 
   .exec-content strong {
@@ -313,17 +309,18 @@
   }
 
   .stat-box {
-    background: rgba(0,0,0,0.3);
+    background: #0a1218;
     border: 1px solid var(--border);
-    border-radius: 3px;
+    border-left: 3px solid var(--accent-cyan);
     padding: 14px 16px;
   }
 
   .stat-label {
     font-family: var(--header-font);
-    font-size: 10px;
+    font-size: 9px;
+    font-weight: 600;
     color: var(--muted);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 6px;
   }
@@ -342,11 +339,8 @@
     margin-top: 4px;
   }
 
-  .stat-note {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
+  .stat-change.up { color: var(--accent-green); }
+  .stat-change.down { color: var(--accent-red); }
 
   /* BULLETS */
   .bullet-list {
@@ -357,27 +351,43 @@
   }
 
   .bullet-list li {
-    display: flex;
-    gap: 10px;
-    font-size: 13px;
-    line-height: 1.6;
+    padding-left: 18px;
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.65;
     color: var(--text);
   }
 
   .bullet-list li::before {
     content: '▸';
+    position: absolute;
+    left: 0;
     color: var(--accent-cyan);
-    flex-shrink: 0;
-    margin-top: 1px;
-    font-size: 12px;
+    font-size: 11px;
+    top: 2px;
   }
 
   .bullet-list li strong {
     color: var(--accent-yellow);
   }
 
-  .bullet-list li .flag {
+  .bullet-list li .highlight-red {
+    color: var(--accent-red);
+    font-weight: 600;
+  }
+
+  .bullet-list li .highlight-green {
+    color: var(--accent-green);
+    font-weight: 600;
+  }
+
+  .bullet-list li .highlight-orange {
     color: var(--accent-orange);
+    font-weight: 600;
+  }
+
+  .bullet-list li .highlight-cyan {
+    color: var(--accent-cyan);
     font-weight: 600;
   }
 
@@ -391,13 +401,12 @@
 
   .scenario-box {
     border: 1px solid var(--border);
-    border-radius: 3px;
     padding: 16px;
   }
 
-  .scenario-bull { border-top: 3px solid var(--accent-green); background: rgba(0,230,118,0.04); }
-  .scenario-base { border-top: 3px solid var(--accent-yellow); background: rgba(255,214,0,0.04); }
-  .scenario-bear { border-top: 3px solid var(--accent-red); background: rgba(255,61,87,0.04); }
+  .scenario-bull { border-top: 3px solid var(--accent-green); background: rgba(0,230,118,0.03); }
+  .scenario-base { border-top: 3px solid var(--accent-yellow); background: rgba(255,214,0,0.03); }
+  .scenario-bear { border-top: 3px solid var(--accent-red); background: rgba(255,61,87,0.03); }
 
   .scenario-header {
     display: flex;
@@ -411,7 +420,6 @@
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
   }
 
   .scenario-bull .scenario-label { color: var(--accent-green); }
@@ -431,7 +439,7 @@
   .scenario-target {
     font-family: var(--header-font);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text);
     margin-bottom: 8px;
   }
@@ -439,14 +447,14 @@
   .scenario-desc {
     font-size: 12px;
     color: var(--muted);
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   /* TABLES */
   .data-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .data-table th {
@@ -456,15 +464,15 @@
     color: var(--muted);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    text-align: left;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border-bottom: 1px solid var(--border);
-    background: rgba(0,0,0,0.2);
+    text-align: left;
+    background: #0a1218;
   }
 
   .data-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid rgba(26,37,48,0.6);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
     color: var(--text);
     vertical-align: top;
   }
@@ -483,9 +491,9 @@
     font-weight: 600;
     color: var(--accent-red);
     background: rgba(255,61,87,0.1);
-    padding: 2px 6px;
-    border-radius: 2px;
-    letter-spacing: 0.06em;
+    border: 1px solid rgba(255,61,87,0.3);
+    padding: 2px 8px;
+    letter-spacing: 0.08em;
   }
 
   .impact-med {
@@ -494,56 +502,50 @@
     font-weight: 600;
     color: var(--accent-yellow);
     background: rgba(255,214,0,0.1);
-    padding: 2px 6px;
-    border-radius: 2px;
-    letter-spacing: 0.06em;
+    border: 1px solid rgba(255,214,0,0.3);
+    padding: 2px 8px;
+    letter-spacing: 0.08em;
   }
 
-  .ticker-sym {
-    font-family: var(--header-font);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--accent-cyan);
-  }
-
-  /* OPTIONS METRICS GRID */
-  .options-grid {
+  /* VOL METRICS GRID */
+  .vol-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 20px;
   }
 
-  .options-cell {
-    background: rgba(0,0,0,0.3);
+  .vol-cell {
+    background: #0a1218;
     border: 1px solid var(--border);
-    border-radius: 3px;
     padding: 14px 16px;
   }
 
-  .options-cell-label {
+  .vol-cell-label {
     font-family: var(--header-font);
-    font-size: 10px;
+    font-size: 9px;
+    font-weight: 600;
     color: var(--muted);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 6px;
   }
 
-  .options-cell-value {
+  .vol-cell-value {
     font-family: var(--header-font);
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 600;
     color: var(--text);
   }
 
-  .options-cell-sub {
+  .vol-cell-sub {
+    font-family: var(--header-font);
     font-size: 11px;
     color: var(--muted);
     margin-top: 4px;
   }
 
-  /* BTC LEVELS TABLE */
+  /* KEY LEVELS TABLE */
   .levels-table {
     width: 100%;
     border-collapse: collapse;
@@ -551,36 +553,37 @@
 
   .levels-table tr td {
     padding: 9px 14px;
-    border-bottom: 1px solid rgba(26,37,48,0.5);
-    font-size: 13px;
-  }
-
-  .levels-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .level-label {
+    border-bottom: 1px solid var(--border);
     font-family: var(--header-font);
-    font-size: 11px;
+    font-size: 12px;
+  }
+
+  .levels-table tr td:first-child {
     color: var(--muted);
-    letter-spacing: 0.06em;
-    width: 200px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    width: 45%;
   }
 
-  .level-value {
-    font-family: var(--header-font);
-    font-size: 13px;
+  .levels-table tr td:last-child {
+    color: var(--text);
     font-weight: 600;
     text-align: right;
   }
 
-  .level-current {
+  .levels-table .current-row td {
     background: rgba(0,212,255,0.06);
-    border-left: 3px solid var(--accent-cyan) !important;
+    border-left: 3px solid var(--accent-cyan);
   }
 
-  .level-current .level-label { color: var(--accent-cyan); }
-  .level-current .level-value { color: var(--accent-cyan); }
+  .levels-table .current-row td:first-child {
+    color: var(--accent-cyan);
+  }
+
+  .levels-table .current-row td:last-child {
+    color: var(--accent-cyan);
+  }
 
   /* RISK PANELS */
   .risk-grid {
@@ -593,15 +596,15 @@
     background: var(--panel);
     border: 1px solid var(--border);
     border-top: 3px solid var(--accent-red);
-    border-radius: 3px;
     padding: 18px;
   }
 
-  .risk-num {
+  .risk-number {
     font-family: var(--header-font);
     font-size: 10px;
+    font-weight: 600;
     color: var(--accent-red);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     margin-bottom: 8px;
   }
 
@@ -617,90 +620,64 @@
   .risk-section-label {
     font-family: var(--header-font);
     font-size: 9px;
+    font-weight: 600;
     color: var(--muted);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 4px;
-    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-top: 12px;
   }
 
   .risk-text {
-    font-size: 12px;
+    font-size: 12.5px;
     color: var(--muted);
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   .risk-trigger {
+    font-family: var(--header-font);
     font-size: 12px;
     color: var(--accent-orange);
     line-height: 1.5;
-    font-weight: 600;
+    background: rgba(255,107,53,0.06);
+    border: 1px solid rgba(255,107,53,0.2);
+    padding: 8px 10px;
+    margin-top: 6px;
   }
 
   /* SPOTLIGHT */
-  .spotlight {
-    background: rgba(255,107,53,0.05);
-    border: 1px solid rgba(255,107,53,0.25);
-    border-left: 4px solid var(--accent-orange);
-    border-radius: 3px;
-    padding: 18px 20px;
-    margin-top: 16px;
+  .spotlight-panel {
+    background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, rgba(179,136,255,0.04) 100%);
+    border: 1px solid var(--border-glow);
+    border-left: 4px solid var(--accent-purple);
+    padding: 20px 24px;
+    margin-top: 20px;
   }
 
-  .spotlight-label {
-    font-family: var(--header-font);
-    font-size: 10px;
-    color: var(--accent-orange);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .spotlight-title {
-    font-family: var(--header-font);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-
-  /* DIVIDER */
-  .section-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 28px 0;
-  }
-
-  /* FOOTER */
-  .footer {
-    background: var(--panel);
-    border-top: 1px solid var(--border);
-    padding: 16px 0;
-    margin-top: 40px;
-  }
-
-  .footer-inner {
+  .spotlight-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 14px;
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .footer-ts {
+  .spotlight-ticker {
     font-family: var(--header-font);
-    font-size: 10px;
-    color: var(--muted);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent-purple);
   }
 
-  .footer-disc {
-    font-size: 11px;
+  .spotlight-name {
+    font-family: var(--header-font);
+    font-size: 12px;
     color: var(--muted);
-    max-width: 600px;
-    text-align: right;
+    margin-top: 2px;
   }
 
-  /* GRID HELPERS */
+  /* TWO COLUMN LAYOUT */
   .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -713,583 +690,598 @@
     gap: 16px;
   }
 
+  /* DIVIDER */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 4px 0;
+  }
+
+  /* FOOTER */
+  .report-footer {
+    background: #090e14;
+    border-top: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .footer-timestamp {
+    font-family: var(--header-font);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .footer-disclaimer {
+    font-family: var(--header-font);
+    font-size: 10px;
+    color: var(--muted);
+    opacity: 0.6;
+    max-width: 600px;
+    text-align: right;
+    line-height: 1.5;
+  }
+
   /* RESPONSIVE */
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .vol-grid { grid-template-columns: repeat(2, 1fr); }
     .scenario-grid { grid-template-columns: 1fr; }
-    .options-grid { grid-template-columns: repeat(2, 1fr); }
     .risk-grid { grid-template-columns: 1fr; }
     .two-col { grid-template-columns: 1fr; }
     .three-col { grid-template-columns: 1fr; }
-    .exec-row { grid-template-columns: 1fr; gap: 6px; }
   }
 
-  @media (max-width: 600px) {
-    .stat-grid { grid-template-columns: 1fr 1fr; }
-    .options-grid { grid-template-columns: 1fr 1fr; }
-    .header-title { font-size: 14px; }
-    .container { padding: 0 12px; }
-    .panel { padding: 14px; }
+  @media (max-width: 768px) {
+    .main-container { padding: 16px; }
+    .report-header { padding: 18px 16px; }
+    .exec-row { flex-direction: column; }
+    .exec-label { min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .header-meta { text-align: left; }
+    .report-footer { flex-direction: column; }
+    .footer-disclaimer { text-align: left; }
   }
 
   @media (max-width: 480px) {
     .stat-grid { grid-template-columns: 1fr; }
-    .options-grid { grid-template-columns: 1fr; }
-    .data-table { font-size: 11px; }
-    .data-table th, .data-table td { padding: 7px 8px; }
+    .vol-grid { grid-template-columns: 1fr; }
+    .report-subtitle { font-size: 16px; }
+    .main-container { padding: 12px; }
   }
 
-  .highlight-cyan { color: var(--accent-cyan); font-weight: 600; }
-  .highlight-orange { color: var(--accent-orange); font-weight: 600; }
-  .highlight-yellow { color: var(--accent-yellow); font-weight: 600; }
-  .highlight-red { color: var(--accent-red); font-weight: 600; }
-  .highlight-green { color: var(--accent-green); font-weight: 600; }
-  .highlight-purple { color: var(--accent-purple); font-weight: 600; }
+  /* INTERMARKET SECTION */
+  .intermarket-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
 
-  .panel-title {
+  .im-cell {
+    background: #0a1218;
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+  }
+
+  .im-label {
+    font-family: var(--header-font);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .im-value {
+    font-family: var(--header-font);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .im-chg {
     font-family: var(--header-font);
     font-size: 11px;
-    font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
+    margin-top: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .intermarket-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .intermarket-row { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════ HEADER -->
-<header class="header">
-  <div class="container">
-    <div class="header-inner">
-      <div class="header-label">// DAILY PRE-MARKET INTELLIGENCE REPORT</div>
-      <div class="header-title">MARKET INTELLIGENCE DESK · MORNING BRIEF</div>
-      <div class="header-meta">
-        <span class="date">Thursday, March 19, 2026</span>
-        <span>Compiled: 05:30 ET</span>
-        <span>Session: Pre-Market</span>
-        <span style="color: var(--accent-red);">⚠ ELEVATED RISK ENVIRONMENT</span>
-      </div>
+<!-- ═══════════════════════════════════════════════════════ HEADER -->
+<header class="report-header">
+  <div class="header-top">
+    <div>
+      <div class="report-title">// DAILY PRE-MARKET INTELLIGENCE REPORT</div>
+      <div class="report-subtitle">MARKET <span>INTELLIGENCE</span> BRIEF</div>
+    </div>
+    <div class="header-meta">
+      <div class="date">THURSDAY, MARCH 19, 2026</div>
+      <div>COMPILED: 05:45 ET</div>
+      <div>COVERAGE: EQUITIES · RATES · CRYPTO · MACRO</div>
     </div>
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════════════════════ TICKER BAR -->
+<!-- ═══════════════════════════════════════════════════════ TICKER BAR -->
 <div class="ticker-wrap">
-  <div class="ticker-track">
-    <!-- First copy -->
-    <div class="ticker-inner">
+  <div class="ticker-label">LIVE</div>
+  <div class="ticker-scroll-container">
+    <div class="ticker-track">
+      <!-- First set -->
       <div class="ticker-item">
-        <span class="ticker-symbol">SPX</span>
+        <span class="ticker-sym">SPX</span>
         <span class="ticker-price">6,624.70</span>
-        <span class="ticker-change down">▼ -1.36%</span>
+        <span class="ticker-chg down">▼ -1.36%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">NDX</span>
+        <span class="ticker-sym">NDX</span>
         <span class="ticker-price">22,152.42</span>
-        <span class="ticker-change down">▼ -1.46%</span>
+        <span class="ticker-chg down">▼ -1.46%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">DJI</span>
+        <span class="ticker-sym">DJI</span>
         <span class="ticker-price">46,225.15</span>
-        <span class="ticker-change down">▼ -1.63%</span>
+        <span class="ticker-chg down">▼ -1.63%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">ES FUTS</span>
-        <span class="ticker-price">6,740</span>
-        <span class="ticker-change down">▼ -0.48%</span>
+        <span class="ticker-sym">ES FUTURES</span>
+        <span class="ticker-price">6,740.40</span>
+        <span class="ticker-chg up">▲ +0.36%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">BTC/USD</span>
-        <span class="ticker-price">71,397.92</span>
-        <span class="ticker-change down">▼ -4.00%</span>
+        <span class="ticker-sym">BTC/USD</span>
+        <span class="ticker-price">$71,397.92</span>
+        <span class="ticker-chg down">▼ -4.00%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">WTI</span>
-        <span class="ticker-price">93.77</span>
-        <span class="ticker-change down">▼ -1.84%</span>
+        <span class="ticker-sym">WTI</span>
+        <span class="ticker-price">$93.77</span>
+        <span class="ticker-chg down">▼ -1.84%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">GOLD</span>
-        <span class="ticker-price">4,844.34</span>
-        <span class="ticker-change down">▼ -0.20%</span>
+        <span class="ticker-sym">GOLD</span>
+        <span class="ticker-price">$4,844.34</span>
+        <span class="ticker-chg down">▼ -0.20%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">VIX</span>
+        <span class="ticker-sym">VIX</span>
         <span class="ticker-price">25.09</span>
-        <span class="ticker-change down" style="color: var(--accent-red);">▲ +12.16%</span>
+        <span class="ticker-chg down">▲ +12.16%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">10Y</span>
+        <span class="ticker-sym">10Y</span>
         <span class="ticker-price">4.259%</span>
-        <span class="ticker-change down">▲ +1.36%</span>
+        <span class="ticker-chg down">▲ +1.36%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">DXY</span>
-        <span class="ticker-price">100.13</span>
-        <span class="ticker-change up">▲ +0.30%</span>
+        <span class="ticker-sym">DXY</span>
+        <span class="ticker-price">100.01</span>
+        <span class="ticker-chg down">▼ -0.08%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">USD/JPY</span>
+        <span class="ticker-sym">USD/JPY</span>
         <span class="ticker-price">159.59</span>
-        <span class="ticker-change down">▼ -0.08%</span>
+        <span class="ticker-chg down">▼ -0.08%</span>
       </div>
+      <!-- Duplicate set for seamless loop -->
       <div class="ticker-item">
-        <span class="ticker-symbol">BRENT</span>
-        <span class="ticker-price">102.16</span>
-        <span class="ticker-change down">▼ -1.22%</span>
-      </div>
-      <div class="ticker-item">
-        <span class="ticker-symbol">COPPER</span>
-        <span class="ticker-price">5.7463</span>
-        <span class="ticker-change down">▼ -0.33%</span>
-      </div>
-    </div>
-    <!-- Duplicate for seamless loop -->
-    <div class="ticker-inner">
-      <div class="ticker-item">
-        <span class="ticker-symbol">SPX</span>
+        <span class="ticker-sym">SPX</span>
         <span class="ticker-price">6,624.70</span>
-        <span class="ticker-change down">▼ -1.36%</span>
+        <span class="ticker-chg down">▼ -1.36%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">NDX</span>
+        <span class="ticker-sym">NDX</span>
         <span class="ticker-price">22,152.42</span>
-        <span class="ticker-change down">▼ -1.46%</span>
+        <span class="ticker-chg down">▼ -1.46%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">DJI</span>
+        <span class="ticker-sym">DJI</span>
         <span class="ticker-price">46,225.15</span>
-        <span class="ticker-change down">▼ -1.63%</span>
+        <span class="ticker-chg down">▼ -1.63%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">ES FUTS</span>
-        <span class="ticker-price">6,740</span>
-        <span class="ticker-change down">▼ -0.48%</span>
+        <span class="ticker-sym">ES FUTURES</span>
+        <span class="ticker-price">6,740.40</span>
+        <span class="ticker-chg up">▲ +0.36%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">BTC/USD</span>
-        <span class="ticker-price">71,397.92</span>
-        <span class="ticker-change down">▼ -4.00%</span>
+        <span class="ticker-sym">BTC/USD</span>
+        <span class="ticker-price">$71,397.92</span>
+        <span class="ticker-chg down">▼ -4.00%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">WTI</span>
-        <span class="ticker-price">93.77</span>
-        <span class="ticker-change down">▼ -1.84%</span>
+        <span class="ticker-sym">WTI</span>
+        <span class="ticker-price">$93.77</span>
+        <span class="ticker-chg down">▼ -1.84%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">GOLD</span>
-        <span class="ticker-price">4,844.34</span>
-        <span class="ticker-change down">▼ -0.20%</span>
+        <span class="ticker-sym">GOLD</span>
+        <span class="ticker-price">$4,844.34</span>
+        <span class="ticker-chg down">▼ -0.20%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">VIX</span>
+        <span class="ticker-sym">VIX</span>
         <span class="ticker-price">25.09</span>
-        <span class="ticker-change" style="color: var(--accent-red);">▲ +12.16%</span>
+        <span class="ticker-chg down">▲ +12.16%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">10Y</span>
+        <span class="ticker-sym">10Y</span>
         <span class="ticker-price">4.259%</span>
-        <span class="ticker-change up">▲ +1.36%</span>
+        <span class="ticker-chg down">▲ +1.36%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">DXY</span>
-        <span class="ticker-price">100.13</span>
-        <span class="ticker-change up">▲ +0.30%</span>
+        <span class="ticker-sym">DXY</span>
+        <span class="ticker-price">100.01</span>
+        <span class="ticker-chg down">▼ -0.08%</span>
       </div>
       <div class="ticker-item">
-        <span class="ticker-symbol">USD/JPY</span>
+        <span class="ticker-sym">USD/JPY</span>
         <span class="ticker-price">159.59</span>
-        <span class="ticker-change down">▼ -0.08%</span>
-      </div>
-      <div class="ticker-item">
-        <span class="ticker-symbol">BRENT</span>
-        <span class="ticker-price">102.16</span>
-        <span class="ticker-change down">▼ -1.22%</span>
-      </div>
-      <div class="ticker-item">
-        <span class="ticker-symbol">COPPER</span>
-        <span class="ticker-price">5.7463</span>
-        <span class="ticker-change down">▼ -0.33%</span>
+        <span class="ticker-chg down">▼ -0.08%</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════ ALERT BANNER -->
-<div class="container">
-  <div class="alert-banner">
-    <div class="alert-label">
-      <div class="alert-dot"></div>
-      ACTIVE RISK EVENT — GEOPOLITICAL / MACRO SHOCK
-    </div>
-    <div class="alert-text">
-      <strong>IRAN WAR / STRAIT OF HORMUZ DISRUPTION + POST-FED HAWKISH REPRICING:</strong> 
-      Brent crude holding above $100/bbl with Brent-WTI spread at ~$10/bbl signaling acute seaborne supply stress. Fed held at 3.50%–3.75% on March 18 and signaled only <strong>one cut in 2026</strong>, pushing rate cut expectations to September–October at earliest. VIX spiked +12.16% to 25.09 in backwardation — the market is pricing near-term tail risk, not a slow grind. Stagflation regime now the base case. Size accordingly.
-    </div>
+<!-- ═══════════════════════════════════════════════════════ ALERT BANNER -->
+<div class="alert-banner">
+  <div class="alert-tag">⚠ ACTIVE RISK EVENT</div>
+  <div class="alert-text">
+    <strong>IRAN WAR / STRAIT OF HORMUZ DISRUPTION ONGOING</strong> — ~7–8 million bpd supply offline. Brent at $102.16, WTI at $93.77. Stagflationary feedback loop active. Fed held 3.50–3.75% (11-1 vote); signaled one cut in 2026. Markets repricing rate path lower. Geopolitical risk premium elevated across all asset classes.
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════ EXECUTIVE SUMMARY -->
-<div class="container">
-  <div class="panel panel-cyan">
-    <div class="section-tag">
-      <span class="tag-num">EXEC</span>
-      <span class="tag-title">Executive Summary</span>
+<!-- ═══════════════════════════════════════════════════════ MAIN CONTENT -->
+<div class="main-container">
+
+  <!-- ═══ EXECUTIVE SUMMARY -->
+  <section>
+    <div class="section-tag tag-cyan">00 · Executive Summary</div>
+
+    <div class="exec-row">
+      <div class="exec-label">PRIMARY FOCUS</div>
+      <div class="exec-content">
+        <strong>BABA earnings + Hormuz oil premium vs. ES futures overnight bounce.</strong> Yesterday's -1.36% SPX close was driven by the post-Fed repricing of the rate path (one cut in 2026, September at earliest) colliding with persistent oil shock. ES futures are +0.36% overnight — treat this as a dead-cat bounce until proven otherwise. BABA reports pre-market today; any China macro commentary or demand signal will move the tape. The real question is whether the oil-driven stagflation narrative is fully priced at VIX 25 or if there's another leg down.
+      </div>
     </div>
-    <div class="exec-grid">
-      <div class="exec-row">
-        <div class="exec-label">PRIMARY FOCUS</div>
-        <div class="exec-content">
-          <strong>Post-Fed stagflation repricing is the dominant force.</strong> Yesterday's hold at 3.50%–3.75% with a hawkish dot plot (one cut in 2026) collided with oil above $90 WTI / $100 Brent to produce a textbook stagflation signal: equities down hard, rates up, dollar bid, gold holding. Today's catalyst is <strong>Initial Jobless Claims</strong> — a weak print (claims rising) confirms growth is cracking under the weight of energy costs and tight policy, accelerating the stagflation narrative. A strong print keeps the "higher for longer" pressure on without the growth relief valve. Watch the 10Y at 4.259% — a break above 4.35% today would be the next leg of equity pressure.
+
+    <div class="exec-row">
+      <div class="exec-label">POSITIONING</div>
+      <div class="exec-content">
+        VIX at <strong>25.09 (+12.16%)</strong> with VVIX at <strong>126.50 (+14.43%)</strong> signals vol-of-vol is spiking — the market is buying protection on its protection. VIX term structure in backwardation confirms near-term fear is acute, not structural. SKEW at <strong>145.04</strong> means tail hedges are expensive. In this regime: reduce gross exposure, do not sell puts naked, prefer defined-risk structures. Gamma is working against longs on down days. Size down 20–30% vs. normal. If you're hedged, hold — don't chase the overnight bounce with fresh longs before BABA prints.
+      </div>
+    </div>
+
+    <div class="exec-row">
+      <div class="exec-label">STRATEGIC OUTLOOK</div>
+      <div class="exec-content">
+        The picture changes on two catalysts: <strong>(1) Hormuz reopening</strong> — any credible de-escalation signal collapses the oil risk premium and gives the Fed cover to cut; equities rip. <strong>(2) March CPI (April print)</strong> — if energy feeds into core, the Fed is boxed and the zero-cut scenario becomes consensus, breaking the bond floor. Asymmetry today is skewed bearish: the overnight ES bounce is thin, gold near $4,844 despite dollar stability signals persistent safe-haven demand that is NOT consistent with a risk-on recovery. Watch Brent $100 as the psychological floor — a break below opens room for equity relief. A break above $110 is the next shock threshold.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 01 · MACRO ENVIRONMENT -->
+  <section>
+    <div class="section-tag tag-orange">01 · Macro Environment</div>
+
+    <div class="panel panel-orange">
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-label">10Y Treasury</div>
+          <div class="stat-value">4.259%</div>
+          <div class="stat-change down">▲ +1.36% | +6bp</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">CPI YoY (Feb '26)</div>
+          <div class="stat-value">2.4%</div>
+          <div class="stat-change down">Core: 2.5% | Above target</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Fed Funds Rate</div>
+          <div class="stat-value">3.50–3.75%</div>
+          <div class="stat-change down">Hold — 1 cut projected 2026</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">WTI Crude</div>
+          <div class="stat-value">$93.77</div>
+          <div class="stat-change down">▼ -1.84% | Brent $102.16</div>
         </div>
       </div>
-      <div class="exec-row">
-        <div class="exec-label">POSITIONING</div>
-        <div class="exec-content">
-          VIX at 25.09 with VVIX at 126.50 (+14.43%) signals <strong>vol-of-vol is spiking</strong> — options themselves are getting expensive fast. VIX term structure in backwardation means the market is paying up for near-term protection, not hedging tail risk six months out. This is a <strong>short-gamma, long-vega environment</strong>: buying single-leg puts is expensive; consider put spreads or ratio structures to reduce premium bleed. Reduce gross exposure before adding hedges — the cost of carry on protection is elevated. Do not sell vol into this; VVIX at 126 suggests the vol spike has further to run. Risk sizing: treat current conditions as a 1.5–2x normal vol regime and size positions accordingly.
-        </div>
-      </div>
-      <div class="exec-row">
-        <div class="exec-label">STRATEGIC OUTLOOK</div>
-        <div class="exec-content">
-          The asymmetry is <strong>skewed bearish</strong> until one of three things changes: (1) Strait of Hormuz reopens and oil collapses back below $80 — this is the single biggest positive catalyst and would immediately reprice Fed expectations; (2) CPI prints sub-2.2% on a sustained basis, giving the Fed cover to cut despite geopolitical noise; (3) earnings season delivers margin resilience that defies the energy/tariff cost squeeze. None of these are imminent. The non-consensus signal worth watching: <strong>gold is NOT rallying hard despite the risk-off move</strong> — at $4,844 it's barely off highs but not surging, suggesting the dollar's strength (DXY 100.13) is capping the flight-to-safety bid. If gold breaks above $4,900 on a dollar-up day, that's a genuine fear signal. USD/JPY at 159.59 holding stable is the one thing preventing a yen carry unwind — watch that level.
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ═══════════════════════════════════════════════════════════ 01 MACRO -->
-<div class="container">
-  <hr class="section-divider">
-  <div class="section-tag">
-    <span class="tag-num">01</span>
-    <span class="tag-title">Macro Environment</span>
-  </div>
-
-  <div class="stat-grid">
-    <div class="stat-box">
-      <div class="stat-label">10Y Treasury</div>
-      <div class="stat-value" style="color: var(--accent-orange);">4.259%</div>
-      <div class="stat-change up">▲ +1.36% (post-Fed)</div>
-      <div class="stat-note">Watch 4.35% as next resistance</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label">WTI Crude</div>
-      <div class="stat-value" style="color: var(--accent-orange);">$93.77</div>
-      <div class="stat-change down">▼ -1.84% on session</div>
-      <div class="stat-note">Brent-WTI spread: ~$10/bbl</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label">Core CPI (Feb '26)</div>
-      <div class="stat-value" style="color: var(--accent-yellow);">2.5%</div>
-      <div class="stat-change flat">YoY | Headline: 2.4%</div>
-      <div class="stat-note">Above Fed comfort zone</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label">Fed Funds Rate</div>
-      <div class="stat-value" style="color: var(--accent-cyan);">3.625%</div>
-      <div class="stat-change flat">3.50%–3.75% | Hold (Mar 18)</div>
-      <div class="stat-note">Next cut: Sep–Oct at earliest</div>
-    </div>
-  </div>
-
-  <div class="panel panel-orange">
-    <div class="panel-title">Macro Regime · Rates · Intermarket Signals</div>
-    <ul class="bullet-list">
-      <li>
-        <div><strong>Stagflation regime is now the base case, not a tail risk.</strong> The Fed's March 18 hold with a one-cut dot plot confirms Powell is prioritizing inflation credibility over growth support. With Core CPI at 2.5% and energy costs structurally elevated by the Hormuz disruption, the Fed has no room to pivot. This is the worst macro combination for equities: earnings under pressure from costs, multiples under pressure from rates, and no policy backstop.</div>
-      </li>
-      <li>
-        <div><strong>10Y at 4.259% is the fulcrum.</strong> The +1.36% move post-Fed reflects the market pricing out the rate cut cycle. A sustained move above 4.35% would reprice equity risk premiums materially — particularly for high-multiple tech (NDX already -1.46%). The 2Y data is unavailable, but the front end is likely anchored by the Fed hold, meaning any 10Y move is a real-rate story, not a breakeven story. That's more damaging for growth equities.</div>
-      </li>
-      <li>
-        <div><strong>Dollar strength (DXY 100.13, +0.30%) post-Fed is a classic hawkish repricing signal</strong> — but it's creating a cross-current. Dollar up + equities down + gold flat is NOT the typical risk-off playbook where gold surges. The dollar is absorbing the safe-haven bid that would normally go to gold. Watch for this to break: if equities continue lower and gold starts outperforming the dollar, that's the signal that the market is moving from "hawkish repricing" to "genuine crisis pricing."</div>
-      </li>
-      <li>
-        <div><span class="flag">⚑ NON-CONSENSUS:</span> <strong>Copper at $5.7463 (-0.33%) is NOT confirming a growth collapse.</strong> Copper is off modestly but remains elevated — it is NOT pricing a recession. This divergence from equity weakness suggests the market is pricing a stagflation squeeze on margins and multiples rather than a demand destruction event. If copper breaks below $5.50, that changes the picture toward genuine growth contraction.</div>
-      </li>
-      <li>
-        <div><strong>USD/JPY at 159.59 is the systemic risk wildcard.</strong> Yen is barely moving (-0.08%) despite the risk-off environment — this is unusual. The yen carry trade remains intact at these levels. A move above 162 or a sharp reversal below 155 would both be disruptive: the former signals BOJ credibility loss, the latter triggers carry unwind and a global deleveraging event. Current stability is fragile, not reassuring.</div>
-      </li>
-      <li>
-        <div><strong>Brent-WTI spread at ~$10/bbl is the Hormuz premium in real-time.</strong> Brent at $102.16 vs WTI at $93.77 reflects seaborne supply stress — refiners dependent on Middle East crude are paying up. This spread widening is a leading indicator: if it narrows, geopolitical tension is easing; if it widens toward $15+, expect another leg higher in headline CPI and another hawkish Fed response.</div>
-      </li>
-    </ul>
-  </div>
-
-  <div class="scenario-grid">
-    <div class="scenario-box scenario-bull">
-      <div class="scenario-header">
-        <span class="scenario-label">Bull Case</span>
-        <span class="scenario-prob">20%</span>
-      </div>
-      <div class="scenario-target">SPX Target: 6,900–7,100</div>
-      <div class="scenario-desc">Hormuz tensions de-escalate, oil falls back below $80. Fed signals willingness to cut earlier. Jobless claims come in strong. Earnings season shows margin resilience. Dollar weakens, gold stabilizes, equities re-rate higher on multiple expansion.</div>
-    </div>
-    <div class="scenario-box scenario-base">
-      <div class="scenario-header">
-        <span class="scenario-label">Base Case</span>
-        <span class="scenario-prob">50%</span>
-      </div>
-      <div class="scenario-target">SPX Target: 6,300–6,600</div>
-      <div class="scenario-desc">Oil stays in $85–$100 range, Fed holds through summer, one cut in Q4. Equities grind lower on multiple compression and modest earnings misses. VIX oscillates 22–30. Stagflation narrative dominates but no systemic break. Slow bleed lower.</div>
-    </div>
-    <div class="scenario-box scenario-bear">
-      <div class="scenario-header">
-        <span class="scenario-label">Bear Case</span>
-        <span class="scenario-prob">30%</span>
-      </div>
-      <div class="scenario-target">SPX Target: 5,800–6,100</div>
-      <div class="scenario-desc">Hormuz fully closes, oil spikes to $130+. CPI re-accelerates to 3.5%+. Fed forced to hike or hold indefinitely. Credit markets crack — private credit stress triggers forced deleveraging. Earnings recession confirmed. VIX 40+. Disorderly selloff.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════ 02 EARNINGS & EVENTS -->
-<div class="container">
-  <hr class="section-divider">
-  <div class="section-tag">
-    <span class="tag-num">02</span>
-    <span class="tag-title">Earnings &amp; Events Calendar</span>
-  </div>
-
-  <div class="two-col">
-    <div class="panel panel-purple">
-      <div class="panel-title">Earnings This Week</div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Ticker</th>
-            <th>Company</th>
-            <th>Date</th>
-            <th>Impact</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="ticker-sym">MU</span></td>
-            <td>Micron Technology</td>
-            <td style="font-family: var(--header-font); font-size: 11px;">Mar 18</td>
-            <td><span class="impact-high">HIGH</span></td>
-          </tr>
-          <tr>
-            <td><span class="ticker-sym">BABA</span></td>
-            <td>Alibaba</td>
-            <td style="font-family: var(--header-font); font-size: 11px;">Mar 16–20</td>
-            <td><span class="impact-high">HIGH</span></td>
-          </tr>
-          <tr>
-            <td><span class="ticker-sym">LULU</span></td>
-            <td>Lululemon Athletica</td>
-            <td style="font-family: var(--header-font); font-size: 11px;">Mar 16–20</td>
-            <td><span class="impact-med">MED</span></td>
-          </tr>
-          <tr>
-            <td><span class="ticker-sym">DOCU</span></td>
-            <td>DocuSign</td>
-            <td style="font-family: var(--header-font); font-size: 11px;">Mar 16–20</td>
-            <td><span class="impact-med">MED</span></td>
-          </tr>
-          <tr>
-            <td><span class="ticker-sym">XPEV</span></td>
-            <td>XPeng Inc</td>
-            <td style="font-family: var(--header-font); font-size: 11px;">Mar 16–20</td>
-            <td><span class="impact-med">MED</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="margin-top: 10px; font-size: 11px; color: var(--muted);">
-        * Expected move data not available in current data set. Treat all high-impact names as ±5–8% range given elevated VIX at 25.09.
-      </div>
-    </div>
-
-    <div class="panel panel-purple">
-      <div class="panel-title">Economic Calendar</div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Event</th>
-            <th>Result / Expected</th>
-            <th>Impact</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="font-family: var(--header-font); font-size: 11px; white-space: nowrap;">Mar 18 ✓</td>
-            <td>Fed Rate Decision</td>
-            <td style="color: var(--accent-yellow); font-family: var(--header-font); font-size: 11px;">HOLD 3.50–3.75%</td>
-            <td><span class="impact-high">HIGH</span></td>
-          </tr>
-          <tr>
-            <td style="font-family: var(--header-font); font-size: 11px; white-space: nowrap;">Mar 18 ✓</td>
-            <td>Fed Dot Plot</td>
-            <td style="color: var(--accent-orange); font-family: var(--header-font); font-size: 11px;">1 cut in 2026</td>
-            <td><span class="impact-high">HIGH</span></td>
-          </tr>
-          <tr style="background: rgba(0,212,255,0.04);">
-            <td style="font-family: var(--header-font); font-size: 11px; white-space: nowrap; color: var(--accent-cyan);">Mar 19 ◀ TODAY</td>
-            <td>Initial Jobless Claims</td>
-            <td style="font-family: var(--header-font); font-size: 11px; color: var(--muted);">Pending</td>
-            <td><span class="impact-med">MED</span></td>
-          </tr>
-          <tr>
-            <td style="font-family: var(--header-font); font-size: 11px; white-space: nowrap;">Mar 20</td>
-            <td>Existing Home Sales (Feb)</td>
-            <td style="font-family: var(--header-font); font-size: 11px; color: var(--muted);">Pending</td>
-            <td><span class="impact-med">MED</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- SPOTLIGHT -->
-  <div class="spotlight">
-    <div class="spotlight-label">⚡ EARNINGS SPOTLIGHT — HIGH IMPACT</div>
-    <div class="spotlight-title">MU (Micron Technology) — Reported March 18</div>
-    <ul class="bullet-list">
-      <li>
-        <div>Micron is the bellwether for AI-driven memory demand — DRAM and HBM pricing cycles are the read-through for the entire semiconductor supply chain. In a stagflation environment, enterprise capex is the first thing to get cut, which directly hits MU's data center revenue. Watch the guidance commentary more than the headline beat/miss.</div>
-      </li>
-      <li>
-        <div><strong>Key question:</strong> Is AI infrastructure spending holding up despite macro headwinds, or are hyperscalers pulling back? MU's forward guidance will set the tone for NVDA, AMD, and the broader NDX tech complex heading into Q2. Given NDX is already -1.46% on the session, any guidance cut will amplify the move.</div>
-      </li>
-      <li>
-        <div><strong>BABA</strong> is the secondary high-impact name — results this week carry geopolitical overlay given US-China trade tensions and tariff environment. Margin compression from tariffs is the key risk. XPEV (XPeng) is the EV read-through on Chinese consumer demand and subsidy dynamics.</div>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════ 03 OPTIONS -->
-<div class="container">
-  <hr class="section-divider">
-  <div class="section-tag">
-    <span class="tag-num">03</span>
-    <span class="tag-title">Equity Options Considerations</span>
-  </div>
-
-  <div class="options-grid">
-    <div class="options-cell">
-      <div class="options-cell-label">VIX Level</div>
-      <div class="options-cell-value" style="color: var(--accent-orange);">25.09</div>
-      <div class="options-cell-sub">+12.16% on session · Elevated regime</div>
-    </div>
-    <div class="options-cell">
-      <div class="options-cell-label">VVIX (Vol-of-Vol)</div>
-      <div class="options-cell-value" style="color: var(--accent-red);">126.50</div>
-      <div class="options-cell-sub">+14.43% · Options on VIX getting expensive</div>
-    </div>
-    <div class="options-cell">
-      <div class="options-cell-label">SKEW Index</div>
-      <div class="options-cell-value" style="color: var(--accent-yellow);">145.04</div>
-      <div class="options-cell-sub">Unchanged · Tail risk premium elevated</div>
-    </div>
-    <div class="options-cell">
-      <div class="options-cell-label">VIX Term Structure</div>
-      <div class="options-cell-value" style="color: var(--accent-red); font-size: 14px;">BACKWARDATION</div>
-      <div class="options-cell-sub">Near-term vol > long-dated vol · Stress signal</div>
-    </div>
-    <div class="options-cell">
-      <div class="options-cell-label">Put/Call Ratio</div>
-      <div class="options-cell-value" style="color: var(--muted); font-size: 14px;">N/A</div>
-      <div class="options-cell-sub">Data not available in current feed</div>
-    </div>
-    <div class="options-cell">
-      <div class="options-cell-label">VIX Percentile</div>
-      <div class="options-cell-value" style="color: var(--accent-orange);">~70th</div>
-      <div class="options-cell-sub">Est. based on 25.09 level · Not extreme yet</div>
-    </div>
-  </div>
-
-  <div class="panel panel-yellow">
-    <div class="panel-title">Options Market Observations</div>
-    <ul class="bullet-list">
-      <li>
-        <div><strong>Vol regime: Transitioning from compressed to elevated.</strong> VIX at 25.09 is not yet in "crisis" territory (that's 35+), but the +12.16% single-session spike combined with VVIX at 126.50 signals the transition is accelerating. This is the dangerous middle zone — vol is expensive enough to hurt option buyers but not yet at the capitulation levels where selling premium becomes attractive. Do not fade this vol spike yet.</div>
-      </li>
-      <li>
-        <div><strong>VVIX at 126.50 is the critical signal today.</strong> Vol-of-vol spiking +14.43% means the options market itself is becoming unstable — dealers are struggling to hedge their books, and bid-ask spreads on SPX options are widening. This is a <span class="flag">short-gamma warning</span>: if you are short options (covered calls, cash-secured puts), your delta exposure is moving faster than normal. Gamma risk is elevated across all strikes near current SPX levels.</div>
-      </li>
-      <li>
-        <div><strong>VIX term structure in backwardation = near-term fear, not long-term structural concern.</strong> The market is paying up for 30-day protection but not pricing a sustained multi-month vol regime. This creates an opportunity: if you believe the stagflation narrative is structural (base case), buying longer-dated vol (3–6 month) while it remains relatively cheap vs. front-month is the asymmetric trade. Roll short-dated hedges into longer tenors.</div>
-      </li>
-      <li>
-        <div><strong>SKEW at 145.04 (unchanged) confirms the tail risk premium is already baked in.</strong> The left tail (downside puts) is expensive relative to ATM vol. This means buying OTM puts for protection is costly — consider put spreads (buy the 5% OTM put, sell the 10% OTM put) to reduce premium outlay while maintaining meaningful downside coverage. The spread between strikes is wide enough to make this structure efficient.</div>
-      </li>
-      <li>
-        <div><strong>Key gamma flip level to watch: SPX 6,500.</strong> Based on the current vol surface and the magnitude of the selloff, dealer gamma exposure likely flips from positive to negative gamma below the 6,500 area — meaning dealers would need to sell futures into weakness to hedge, amplifying any move lower. A break of 6,500 intraday could trigger a cascade. Conversely, a hold above 6,600 (current level) with vol compressing would signal stabilization.</div>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════ 04 BITCOIN -->
-<div class="container">
-  <hr class="section-divider">
-  <div class="section-tag">
-    <span class="tag-num">04</span>
-    <span class="tag-title">Bitcoin — Market Structure</span>
-  </div>
-
-  <div class="two-col">
-    <div class="panel panel-cyan">
-      <div class="panel-title">Key Price Levels</div>
-      <table class="levels-table">
-        <tbody>
-          <tr>
-            <td class="level-label">All-Time High</td>
-            <td class="level-value" style="color: var(--accent-purple);">$126,210.50</td>
-            <td style="font-size: 11px; color: var(--muted);">Oct 6, 2025</td>
-          </tr>
-          <tr>
-            <td class="level-label">Major Resistance</td>
-            <td class="level-value" style="color: var(--accent-red);">$80,000</td>
-            <td style="font-size: 11px; color: var(--muted);">Psychological + prior range</td>
-          </tr>
-          <tr>
-            <td class="level-label">Minor Resistance</td>
-            <td class="level-value" style="color: var(--accent-orange);">$75,000</td>
-            <td style="font-size: 11px; color: var(--muted);">Near-term overhead</td>
-          </tr>
-          <tr class="level-current">
-            <td class="level-label">◀ CURRENT PRICE</td>
-            <td class="level-value">$71,397.92</td>
-            <td style="font-size: 11px; color: var(--accent-cyan);">-4.00% session</td>
-          </tr>
-          <tr>
-            <td class="level-label">Minor Support</td>
-            <td class="level-value" style="color: var(--accent-yellow);">$68,000</td>
-            <td style="font-size: 11px; color: var(--muted);">Prior consolidation zone</td>
-          </tr>
-          <tr>
-            <td class="level-label">Major Support</td>
-            <td class="level-value" style="color: var(--accent-orange);">$62,000</td>
-            <td style="font-size: 11px; color: var(--muted);">200-day MA region (est.)</td>
-          </tr>
-          <tr>
-            <td class="level-label">Bear Capitulation</td>
-            <td class="level-value" style="color: var(--accent-red);">$55,000</td>
-            <td style="font-size: 11px; color: var(--muted);">Structural breakdown level</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="panel panel-cyan">
-      <div class="panel-title">Derivatives &amp; Sentiment</div>
       <ul class="bullet-list">
-        <li>
-          <div><strong>Open Interest: $50.46B</strong> — substantial OI at current levels means any directional move will be amplified by liquidation cascades. The -4.00% session move has already triggered <strong>$184.5M in 24h liquidations</strong>, predominantly long liquidations given the directional move. This is not yet a capitulation-level liquidation event (those run $500M–$1B+), but it's meaningful.</div>
-        </li>
-        <li>
-          <div><strong>Fear &amp; Greed Index at 26 (Fear)</strong> — not yet at extreme fear (sub-15) which historically marks local bottoms. The market is fearful but not panicking. Funding rate data is unavailable, but given the long liquidation pressure and fear reading, funding is likely negative or near zero — not a crowded short yet.</div>
-        </li>
-        <li>
-          <div><strong>BTC is -43.4% from its October 2025 ATH of $126,210.</strong> This is a significant drawdown but within the historical range of BTC bull market corrections (40–60% is common). The question is whether this is a mid-cycle correction or the beginning of a bear market — the answer depends heavily on macro (risk appetite) and the Hormuz situation.</div>
+        <li><strong>Macro regime: Stagflationary transition.</strong> The Fed's 11-1 hold with a single-cut 2026 projection is the clearest signal yet that the central bank is prioritizing inflation over growth. With CPI at 2.4% and core at 2.5%, neither is catastrophic in isolation — but the energy shock from Hormuz is a direct pipeline into March and April CPI prints. The Fed cannot cut into an oil-driven inflation spike without destroying credibility.</li>
+        <li><strong>Rate path repricing is the equity headwind, not just oil.</strong> Markets had priced multiple 2026 cuts as recently as Q4 2025. The shift to one cut (September–October at earliest, 60% odds for December) has mechanically compressed equity multiples. At 4.259% on the 10Y, the equity risk premium is thin. Any further rate rise on hot inflation data is a direct P/E compression event.</li>
+        <li><strong>Brent-WTI spread at ~$10/bbl is a structural signal.</strong> This spread reflects seaborne supply stress — tankers cannot transit Hormuz, so Brent (global seaborne benchmark) commands a premium. Iraq rerouting through Turkey partially offsets, but 7–8 million bpd offline is not a rounding error. This spread will compress only on genuine de-escalation, not on diplomatic noise.</li>
+        <li><strong>DXY at 100.01 is a non-confirmation of the risk-off narrative.</strong> In a classic stagflation shock, the dollar should be stronger as the Fed holds. DXY flat-to-down (-0.08%) suggests either dollar fatigue or capital rotating into non-USD safe havens (gold, JPY). Watch for DXY breaking below 99 — that would signal dollar weakness is becoming a second-order problem.</li>
+        <li><strong>Initial Jobless Claims today (data pending)</strong> — any material uptick above 240K would introduce the growth leg of the stagflation trade. Labor market resilience is the last pillar holding the "soft landing" narrative. A crack here accelerates the bear case.</li>
+      </ul>
+
+      <!-- INTERMARKET CONTEXT -->
+      <div style="margin-top: 20px;">
+        <div class="section-tag tag-yellow" style="margin-bottom: 12px;">INTERMARKET CONTEXT</div>
+        <div class="intermarket-row">
+          <div class="im-cell">
+            <div class="im-label">Gold</div>
+            <div class="im-value">$4,844</div>
+            <div class="im-chg" style="color: var(--accent-red);">▼ -0.20%</div>
+          </div>
+          <div class="im-cell">
+            <div class="im-label">Copper</div>
+            <div class="im-value">$5.7463</div>
+            <div class="im-chg" style="color: var(--accent-red);">▼ -0.33%</div>
+          </div>
+          <div class="im-cell">
+            <div class="im-label">USD/JPY</div>
+            <div class="im-value">159.59</div>
+            <div class="im-chg" style="color: var(--accent-red);">▼ -0.08%</div>
+          </div>
+          <div class="im-cell">
+            <div class="im-label">HY Credit OAS</div>
+            <div class="im-value">~300–350</div>
+            <div class="im-chg" style="color: var(--accent-yellow);">Tightening trend</div>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li><strong>Gold near $4,844 despite dollar stability is the most important non-consensus signal on the board.</strong> In a normal risk-off move, gold rises as the dollar rises. Here, gold is holding near all-time highs while DXY is flat — this is pure geopolitical/inflation premium, not a dollar-driven move. It tells you the market is pricing a scenario where the Fed loses control of inflation expectations. Do not fade gold here.</li>
+          <li><strong>Copper at $5.7463 (-0.33%) is NOT confirming equity weakness in the typical way.</strong> Copper should be collapsing if the market believed a genuine growth slowdown was imminent. The modest decline suggests industrial demand expectations remain intact — the equity selloff is inflation/rate-driven, not demand-destruction driven. This is a subtle but important distinction for sector positioning (materials vs. consumer discretionary).</li>
+          <li><strong>USD/JPY at 159.59 is remarkably stable given the equity volatility.</strong> Yen is not strengthening as a safe haven, which suggests the BOJ's policy normalization path is constraining yen appreciation. If USD/JPY breaks below 155, watch for yen carry unwind — that's a systemic amplifier for equity vol.</li>
+          <li><strong>HY credit spreads at ~300–350 bps with a tightening trend are the one green flag in this picture.</strong> Credit markets are not screaming recession. If spreads were blowing out, the bear case would be much stronger. The tightening trend suggests corporate balance sheets are absorbing the oil shock for now — but this is the canary. Watch for any reversal above 375 bps.</li>
+        </ul>
+      </div>
+
+      <div class="scenario-grid">
+        <div class="scenario-box scenario-bull">
+          <div class="scenario-header">
+            <div class="scenario-label">▲ BULL CASE</div>
+            <div class="scenario-prob">25%</div>
+          </div>
+          <div class="scenario-target">SPX 6,900–7,100</div>
+          <div class="scenario-desc">Hormuz de-escalation credible signal; oil drops to $75–80; Fed signals September cut is live; earnings season confirms margin resilience. ES overnight bounce becomes sustained recovery. Copper confirms with break above $6.</div>
+        </div>
+        <div class="scenario-box scenario-base">
+          <div class="scenario-header">
+            <div class="scenario-label">◆ BASE CASE</div>
+            <div class="scenario-prob">45%</div>
+          </div>
+          <div class="scenario-target">SPX 6,400–6,650</div>
+          <div class="scenario-desc">Oil stays $85–100; Fed holds through summer; one cut in December; earnings mixed; VIX oscillates 20–28. Equity market grinds sideways-to-lower as multiple compression continues. No systemic break.</div>
+        </div>
+        <div class="scenario-box scenario-bear">
+          <div class="scenario-header">
+            <div class="scenario-label">▼ BEAR CASE</div>
+            <div class="scenario-prob">30%</div>
+          </div>
+          <div class="scenario-target">SPX 5,800–6,100</div>
+          <div class="scenario-desc">Hormuz escalates; oil spikes above $115; March CPI prints 3%+; Fed signals zero cuts; credit spreads widen above 400 bps; private credit stress materializes. VIX 35–45 range. Full stagflation repricing.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · EARNINGS & EVENTS CALENDAR -->
+  <section>
+    <div class="section-tag tag-purple">02 · Earnings &amp; Events Calendar</div>
+
+    <div class="two-col">
+      <div class="panel panel-purple">
+        <div class="panel-title">// EARNINGS THIS WEEK</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Company</th>
+              <th>Date</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family: var(--header-font); color: var(--accent-cyan); font-weight: 600;">MU</td>
+              <td>Micron Technology</td>
+              <td style="font-family: var(--header-font); font-size: 12px;">Mar 18</td>
+              <td><span class="impact-high">HIGH</span></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--header-font); color: var(--accent-purple); font-weight: 600;">BABA</td>
+              <td>Alibaba</td>
+              <td style="font-family: var(--header-font); font-size: 12px;">Mar 19 ◀</td>
+              <td><span class="impact-high">HIGH</span></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--header-font); color: var(--accent-cyan); font-weight: 600;">LULU</td>
+              <td>Lululemon Athletica</td>
+              <td style="font-family: var(--header-font); font-size: 12px;">Mar 19</td>
+              <td><span class="impact-med">MED</span></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--header-font); color: var(--accent-cyan); font-weight: 600;">DOCU</td>
+              <td>DocuSign</td>
+              <td style="font-family: var(--header-font); font-size: 12px;">Mar 19</td>
+              <td><span class="impact-med">MED</span></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--header-font); color: var(--accent-cyan); font-weight: 600;">XPEV</td>
+              <td>XPeng Inc</td>
+              <td style="font-family: var(--header-font); font-size: 12px;">Mar 19</td>
+              <td><span class="impact-med">MED</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel panel-purple">
+        <div class="panel-title">// ECONOMIC CALENDAR</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>Expected / Actual</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family: var(--header-font); font-size: 11px;">Mar 18</td>
+              <td>Fed Rate Decision + Powell PC</td>
+              <td style="font-family: var(--header-font); font-size: 11px; color: var(--accent-green);">Hold 3.50–3.75% ✓</td>
+              <td><span class="impact-high">HIGH</span></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--header-font); font-size: 11px;">Mar 19 ◀</td>
+              <td>Initial Jobless Claims</td>
+              <td style="font-family: var(--header-font); font-size: 11px; color: var(--muted);">Pending</td>
+              <td><span class="impact-med">MED</span></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--header-font); font-size: 11px;">Mar 20</td>
+              <td>ECB Rate Decision</td>
+              <td style="font-family: var(--header-font); font-size: 11px; color: var(--muted);">Pending</td>
+              <td><span class="impact-high">HIGH</span></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--header-font); font-size: 11px;">Mar 20</td>
+              <td>Bank of England Decision</td>
+              <td style="font-family: var(--header-font); font-size: 11px; color: var(--muted);">Pending</td>
+              <td><span class="impact-high">HIGH</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EARNINGS SPOTLIGHT -->
+    <div class="spotlight-panel">
+      <div class="spotlight-header">
+        <div>
+          <div class="spotlight-ticker">BABA — Alibaba Group</div>
+          <div class="spotlight-name">EARNINGS SPOTLIGHT // MARCH 19, 2026 (PRE-MARKET)</div>
+        </div>
+        <span class="impact-high">HIGH IMPACT</span>
+      </div>
+      <ul class="bullet-list">
+        <li><strong>Why it matters today:</strong> BABA is the highest-impact print of the week and the most geopolitically sensitive. Any commentary on China domestic consumption, cloud revenue trajectory, or regulatory environment will move not just BABA but the entire China ADR complex (BIDU, JD, PDD) and potentially EM sentiment broadly.</li>
+        <li><strong>Key watch items:</strong> Cloud revenue growth rate (Alibaba Cloud is the margin driver); consumer spending commentary given China's uneven recovery; any mention of US-China trade friction or ADR delisting risk given the current geopolitical backdrop. A beat on cloud + positive consumer commentary is the bull case; a miss on either with cautious guidance is the bear case.</li>
+        <li><strong>Macro overlay:</strong> The Iran war has complicated China's energy import picture — China is a major buyer of Middle Eastern crude. Any BABA management commentary on energy cost pressures or supply chain disruption would be a rare direct link between the Hormuz situation and Chinese corporate earnings. Listen carefully to the call.</li>
+        <li><strong>MU context (reported Mar 18):</strong> Micron beat with strong HBM4 ramp commentary — this is a positive read-through for AI infrastructure demand and should provide a floor for semis today. Watch whether BABA's cloud segment confirms the AI capex cycle is intact in China.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 03 · EQUITY OPTIONS CONSIDERATIONS -->
+  <section>
+    <div class="section-tag tag-yellow">03 · Equity Options Considerations</div>
+
+    <div class="panel panel-yellow">
+      <div class="vol-grid">
+        <div class="vol-cell">
+          <div class="vol-cell-label">VIX Level</div>
+          <div class="vol-cell-value" style="color: var(--accent-orange);">25.09</div>
+          <div class="vol-cell-sub">▲ +12.16% | Elevated</div>
+        </div>
+        <div class="vol-cell">
+          <div class="vol-cell-label">VVIX</div>
+          <div class="vol-cell-value" style="color: var(--accent-red);">126.50</div>
+          <div class="vol-cell-sub">▲ +14.43% | Vol-of-vol spiking</div>
+        </div>
+        <div class="vol-cell">
+          <div class="vol-cell-label">SKEW Index</div>
+          <div class="vol-cell-value" style="color: var(--accent-yellow);">145.04</div>
+          <div class="vol-cell-sub">Flat | Tail risk expensive</div>
+        </div>
+        <div class="vol-cell">
+          <div class="vol-cell-label">VIX Term Structure</div>
+          <div class="vol-cell-value" style="font-size: 16px; color: var(--accent-red);">BACKWARDATION</div>
+          <div class="vol-cell-sub">Near-term fear dominant</div>
+        </div>
+        <div class="vol-cell">
+          <div class="vol-cell-label">Put/Call Ratio</div>
+          <div class="vol-cell-value" style="font-size: 16px; color: var(--muted);">N/A</div>
+          <div class="vol-cell-sub">Data not available</div>
+        </div>
+        <div class="vol-cell">
+          <div class="vol-cell-label">VIX Percentile</div>
+          <div class="vol-cell-value" style="color: var(--accent-orange);">~70th</div>
+          <div class="vol-cell-sub">Est. vs. 12-month range</div>
+        </div>
+      </div>
+
+      <ul class="bullet-list">
+        <li><strong>Vol regime: Transitioning from compressed to elevated.</strong> VIX at 25.09 is not yet in the "crisis" zone (35+), but the +12.16% single-day move and VVIX at 126.50 signal the market is aggressively buying vol-on-vol — a classic sign that institutional players are uncertain about the vol regime itself. This is the most dangerous phase: vol is expensive enough to hurt buyers but not high enough to signal a capitulation bottom.</li>
+        <li><strong>VVIX at 126.50 is the key tell.</strong> When VVIX spikes faster than VIX, it means the options market is pricing a potential VIX spike — i.e., the market is hedging against a vol explosion, not just a price decline. This is consistent with a geopolitical shock (Hormuz) where the tail scenario (oil to $130+) is non-trivial. Selling vol here is a widow-maker trade.</li>
+        <li><strong>VIX backwardation confirms near-term fear is acute.</strong> The front of the VIX curve is elevated above the back — the market is paying up for near-dated protection. This typically resolves in one of two ways: (1) the catalyst resolves and the curve snaps back to contango (vol sellers win), or (2) the catalyst escalates and the entire curve shifts higher. Given Hormuz uncertainty, do not assume resolution is imminent.</li>
+        <li><strong>SKEW at 145.04 means OTM puts are expensive relative to calls.</strong> The market is paying a significant premium for downside tail protection. This makes buying puts expensive and makes put spreads (buying ATM, selling OTM) the more capital-efficient hedge structure. Avoid naked long puts at these SKEW levels unless you're targeting a specific catalyst (e.g., a hot CPI print).</li>
+        <li><strong>Gamma exposure and dealer hedging:</strong> With VIX elevated and the market in backwardation, dealers are likely short gamma on near-dated options. This creates a feedback loop where equity declines force dealers to sell futures, amplifying moves. The SPX 6,600 level is a key watch — a sustained break below likely triggers additional dealer hedging flows. The overnight ES bounce to 6,740 may reflect dealers covering short gamma from yesterday's close, not genuine buying conviction.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 04 · BITCOIN MARKET STRUCTURE -->
+  <section>
+    <div class="section-tag tag-cyan">04 · Bitcoin — Market Structure</div>
+
+    <div class="two-col">
+      <div class="panel panel-cyan">
+        <div class="panel-title">// KEY LEVELS</div>
+        <table class="levels-table">
+          <tr>
+            <td>All-Time High</td>
+            <td style="color: var(--accent-green);">$126,210.50</td>
+          </tr>
+          <tr>
+            <td>Major Resistance</td>
+            <td style="color: var(--accent-red);">$80,000</td>
+          </tr>
+          <tr>
+            <td>Minor Resistance</td>
+            <td style="color: var(--accent-orange);">$75,000</td>
+          </tr>
+          <tr class="current-row">
+            <td>◀ CURRENT PRICE</td>
+            <td>$71,397.92</td>
+          </tr>
+          <tr>
+            <td>Minor Support</td>
+            <td style="color: var(--accent-yellow);">$68,000</td>
+          </tr>
+          <tr>
+            <td>Major Support</td>
+            <td style="color: var(--accent-orange);">$60,000</td>
+          </tr>
+          <tr>
+            <td>Bear Capitulation Level</td>
+            <td style="color: var(--accent-red);">$52,000–$55,000</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="panel panel-cyan">
+        <div class="panel-title">// DERIVATIVES & SENTIMENT</div>
+        <ul class="bullet-list">
+          <li><strong>Open Interest: $50.46 billion</strong> — substantial OI at current price levels means liquidation cascades are a real risk on a break below $68K. The $184.5M in 24h liquidations is elevated but not yet at capitulation levels (those typically exceed $500M–$1B).</li>
+          <li><strong>Funding rate: Positive (long bias)</strong> — longs are still paying shorts to hold positions. This is a crowded long setup. In a risk-off environment with VIX at 25, positive funding is a vulnerability — if spot breaks lower, long liquidations accelerate the move.</li>
+          <li><strong>Fear & Greed at 26/100 (Fear)</strong> — sentiment has deteriorated sharply from the ATH euphoria at $126K. At 26, we're approaching the zone where contrarian buyers historically emerge, but "fear" readings can persist for weeks in a macro headwind environment.</li>
+          <li><strong>BTC is down 43% from its October 2025 ATH of $126,210.</strong> This is a significant drawdown but not unprecedented in BTC cycles. The question is whether this is a mid-cycle correction or the beginning of a bear market — the macro backdrop (stagflation, risk-off) argues for the latter until proven otherwise.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel panel-cyan" style="margin-top: 16px;">
+      <div class="panel-title">// CORRELATION REGIME & SCENARIOS</div>
+      <ul class="bullet-list" style="margin-bottom: 20px;">
+        <li><strong>BTC is trading as a risk-on proxy, not digital gold.</strong> Gold is holding near $4,844 while BTC is down 4% on the day — this is a clear divergence. If BTC were functioning as a digital safe haven, it would be bid alongside gold in a geopolitical shock. Instead, it's selling off with equities. This correlation regime (BTC = risk asset) is the dominant one until BTC demonstrates it can hold or rally while equities decline.</li>
+        <li><strong>The $68
